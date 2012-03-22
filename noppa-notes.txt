@@ -1,0 +1,18 @@
+luennot
+-> luennot-sivulta (tarkistetaan valikosta että on olemassa)
+table.lectures
+
+tentit
+-> etusivu
+h1.contains("tentit"||"exams") + table
+
+harjoitusryhmät / viikkoharjoitukset
+-> etusivulla kaikki, ilman lisätietoja
+h1.contains("harjoitusryhmät"||"weekly exercises") + table
+-> harjoitusryhmät-sivu
+
+harjoitustyöt (assignments)
+-> etusivulla kaikki ilman kuvausta
+h1.contains("harjoitustöiden DL:t"||"assignment deadlines") + table
+-> omalla sivullaan kuvausten kera
+
