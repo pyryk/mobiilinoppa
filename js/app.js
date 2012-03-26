@@ -1,7 +1,7 @@
 window.mobilenoppa = {};
 window.mobilenoppa.views = {};
 
-Ext.application({
+window.mobilenoppa.app = Ext.application({
     name: 'MobileNoppa',
     launch: function() {
       var views = window.mobilenoppa.views;
