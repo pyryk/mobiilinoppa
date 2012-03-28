@@ -10,7 +10,7 @@ import org.jsoup.select.Elements;
 
 public class NoppaScraper {
 
-	public static String COURSE_ID = "t-111.5360";
+	//public static String COURSE_ID = "t-111.5360";
 	
 	private Document getDocument(String url) throws IOException {
 		return Jsoup.connect(url)
@@ -19,15 +19,15 @@ public class NoppaScraper {
 			.get();
 	}
 	
-	public boolean getLecturesExist() throws IOException {
-		String url = String.format("https://noppa.aalto.fi/noppa/kurssi/%s/etusivu", COURSE_ID);
+	public boolean getLecturesExist(String courseID) throws IOException {
+		String url = String.format("https://noppa.aalto.fi/noppa/kurssi/%s/etusivu", courseID);
 		Document doc = getDocument(url);
 		Elements result = doc.select("div#courseNaviContainer div:not(.separator) a:contains(Lectures)");
 		return !result.isEmpty();
 	}
 	
-	public List<Event> getLectures() {
-		String url = String.format("https://noppa.aalto.fi/noppa/kurssi/%s/luennot", COURSE_ID);
+	public List<Event> getLectures(String courseID) {
+		String url = String.format("https://noppa.aalto.fi/noppa/kurssi/%s/luennot", courseID);
 		Document doc;
 		try {
 			doc = getDocument(url);

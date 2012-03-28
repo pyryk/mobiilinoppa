@@ -11,13 +11,18 @@ import javax.ws.rs.*;
 import mobilenoppa.model.Event;
 
 
-@Path("/lectures")
+@Path("/{courseID}/lectures")
 public class LecturesResource {
 	static NoppaScraper scraper = new NoppaScraper();
+	
+	@PathParam("courseID") public String courseID;
+	
+	public LecturesResource() {
+	}
 	
    @GET
    @Produces("application/json")
    public List<Event> getMessage(){
-   	return scraper.getLectures();
+   	return scraper.getLectures(courseID);
    }
 }
