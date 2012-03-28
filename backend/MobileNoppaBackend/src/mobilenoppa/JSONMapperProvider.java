@@ -1,7 +1,6 @@
 package mobilenoppa;
 import javax.ws.rs.ext.*;
 
-import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -22,7 +21,7 @@ public class JSONMapperProvider implements ContextResolver<ObjectMapper> {
 		//mapper.configure(Feature.WRAP_ROOT_VALUE, true);
 		mapper.configure(Feature.INDENT_OUTPUT, true);
 		mapper.setSerializationInclusion(Inclusion.NON_NULL);
-		mapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);
+		//mapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);
 	}
 
 	@Override
