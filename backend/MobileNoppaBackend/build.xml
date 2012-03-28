@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="jar" name="Mobile Noppa">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="jar">
+        <delete dir="build/MobileNoppaBackend"/>
+        <mkdir dir="build/MobileNoppaBackend"/>
+    	
+        <jar destfile="build/MobileNoppaBackend/MobileMoppaBackend.jar">
+            <manifest>
+                <attribute name="Main-Class" value="mobilenoppa.MobileNoppaBackend"/>
+                <attribute name="Class-Path" value=". jsoup-1.6.1.jar jersey-simple-server-1.8.jar simple-4.1.21.jar jersey-bundle-1.12.jar jsr311-api-1.1.1.jar jackson-core-asl-1.9.2.jar jackson-jaxrs-1.9.2.jar jackson-mapper-asl-1.9.2.jar"/>
+            </manifest>
+            <fileset dir="bin"/>
+        </jar>
+        <copy file="../Libraries/lib/jsoup-1.6.1.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/jersey-simple-server-1.8.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/simple-4.1.21.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/jersey-bundle-1.12.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/jsr311-api-1.1.1.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/jackson-core-asl-1.9.2.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/jackson-jaxrs-1.9.2.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/jackson-mapper-asl-1.9.2.jar" todir="build/MobileNoppaBackend"/>
+    </target>
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+</project>
