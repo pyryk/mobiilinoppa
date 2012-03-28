@@ -2,6 +2,8 @@ package mobilenoppa;
 import java.io.Closeable;
 import java.util.*;
 
+import mobilenoppa.resources.*;
+
 import com.sun.jersey.api.core.DefaultResourceConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.simple.container.SimpleServerFactory;
@@ -12,7 +14,7 @@ import com.sun.jersey.simple.container.SimpleServerFactory;
  */
 
 public class MobileNoppaBackend {
-
+	
 	public static void main(String[] args) throws Exception {
 		
 		DefaultResourceConfig resourceConfig = new DefaultResourceConfig(getResources());
@@ -37,8 +39,11 @@ public class MobileNoppaBackend {
        final Set<Class<?>> classes = new HashSet<Class<?>>();
 
        // register root resources
-       classes.add(TestResource.class);
+       classes.add(AllResource.class);
        classes.add(LecturesResource.class);
+       classes.add(ExerciseGroupsResource.class);
+       classes.add(ExamsResource.class);
+       classes.add(AssignmentsResource.class);
 
        // register Jackson ObjectMapper resolver
        classes.add(JSONMapperProvider.class);

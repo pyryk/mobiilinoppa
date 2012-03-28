@@ -2,27 +2,23 @@
  * Created on 28.3.2012
  * @author verkel
  */
-package mobilenoppa;
+package mobilenoppa.resources;
 
 import java.util.List;
 
 import javax.ws.rs.*;
 
 import mobilenoppa.model.Event;
+import mobilenoppa.scraper.NoppaScraper;
 
 
 @Path("/{courseID}/lectures")
 public class LecturesResource {
-	static NoppaScraper scraper = new NoppaScraper();
-	
 	@PathParam("courseID") public String courseID;
 	
-	public LecturesResource() {
-	}
-	
    @GET
-   @Produces("application/json")
+   @Produces(Resources.CONTENT_TYPE)
    public List<Event> getMessage(){
-   	return scraper.getLectures(courseID);
+   	return NoppaScraper.getLectures(courseID);
    }
 }
