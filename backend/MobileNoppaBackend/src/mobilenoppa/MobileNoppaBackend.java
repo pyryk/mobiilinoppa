@@ -15,11 +15,13 @@ import com.sun.jersey.simple.container.SimpleServerFactory;
 
 public class MobileNoppaBackend {
 	
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 		
 		DefaultResourceConfig resourceConfig = new DefaultResourceConfig(getResources());
 		// The following line is to enable GZIP when client accepts it
 //		resourceConfig.getContainerResponseFilters().add(new GZIPContentEncodingFilter());
+		resourceConfig.getContainerResponseFilters().add(new CORSResponseFilter());
 		
 		Map<String, Boolean> features = resourceConfig.getFeatures();
 		features.put(JSONConfiguration.FEATURE_POJO_MAPPING, true);
