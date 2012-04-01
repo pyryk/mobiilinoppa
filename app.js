@@ -13,6 +13,7 @@ window.mobilenoppa.app = Ext.application({
       });
       
       var calendar = Ext.create('MobileNoppa.view.Calendar', {
+        store: CourseStore,
         title: 'Calendar',
         iconCls: 'time',
       });

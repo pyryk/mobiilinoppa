@@ -3,14 +3,16 @@ Ext.define('MobileNoppa.model.Course', {
   extend: 'Ext.data.Model',
 
   config: {
-    fields: [
-      {name: 'id', type: 'string'},
-      {name: 'name', type: 'string'},
-    ],
+    fields: ['id', 'code', 'name'],
     proxy: {
       type: 'localstorage',
       id  : 'mobilenoppa-courses'
     },
-    hasMany: 'CourseItem'
+    //hasMany: 'CourseItem'
   }
+});
+
+var CourseStore = Ext.create('Ext.data.Store', {
+    model: "MobileNoppa.model.Course",
+    autoLoad: true,
 });

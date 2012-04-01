@@ -3,7 +3,7 @@ Ext.define('MobileNoppa.controller.Courses', {
 
     config: {
         refs: {
-            calendar: '#calendar'
+            calendar: 'widget.calendar'
         },
         control: {
             button: {
