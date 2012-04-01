@@ -11,6 +11,6 @@ Ext.define('MobileNoppa.model.Course', {
       type: 'localstorage',
       id  : 'mobilenoppa-courses'
     },
-    //hasMany: 'CourseItem'
+    hasMany: 'CourseItem'
   }
 });
