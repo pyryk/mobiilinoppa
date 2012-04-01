@@ -12,7 +12,7 @@ Ext.define('MobileNoppa.model.Course', {
   }
 });
 
-var CourseStore = Ext.create('Ext.data.Store', {
+/*var CourseStore = Ext.create('Ext.data.Store', {
     model: "MobileNoppa.model.Course",
     autoLoad: true,
-});
+});*/

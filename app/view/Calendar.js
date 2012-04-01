@@ -1,22 +1,20 @@
-var CourseStore;
-
 Ext.define('MobileNoppa.view.Calendar', {
-  extend: 'Ext.List',
+  extend: 'Ext.Panel',
   id: 'calendar',
   alias: 'widget.calendar',
+  fullscreen: true,
   config: {
     loadingText: "Loading courses...",
+    layout: 'fit',
     items: [
-    {
-      xtype: "button",
-      text: "New",
-      ui: "action",
-      id:"new-note-btn"
-    }],
+      {
+        xtype: 'list',
+        store: 'Courses',
+        itemTpl: '{code} {name}'
+      }
+    ],
   },
-  title: 'Calendar',
-  iconCls: 'time',
-  itemTpl: '{name}'
+  
 });
 
 /*Ext.onReady(function() {
