@@ -1,7 +1,7 @@
 Ext.define('MobileNoppa.view.Calendar', {
   extend: 'Ext.Panel',
   id: 'calendar',
-  alias: 'widget.calendar',
+  alias: 'calendar',
   fullscreen: true,
   config: {
     loadingText: "Loading courses...",
@@ -9,8 +9,8 @@ Ext.define('MobileNoppa.view.Calendar', {
     items: [
       {
         xtype: 'list',
-        store: 'Courses',
-        itemTpl: '{code} {name}'
+        store: 'CourseItems',
+        itemTpl: '{title} <span class="description">{date}</span>'
       }
     ],
   },

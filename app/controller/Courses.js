@@ -6,9 +6,9 @@ Ext.define('MobileNoppa.controller.Courses', {
             calendar: 'widget.calendar'
         },
         control: {
-            button: {
+            /*button: {
                 tap: 'addNew'
-            }
+            }*/
         }
     },
     launch: function() {
@@ -22,6 +22,6 @@ Ext.define('MobileNoppa.controller.Courses', {
     },
     addNew: function() {
       console.log("adding a new course");
-      Ext.create('MobileNoppa.model.Course', {});
+      //Ext.create('MobileNoppa.model.Course', {});
     }
 });

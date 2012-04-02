@@ -1,7 +1,15 @@
 Ext.define('MobileNoppa.view.CourseSettings', {
-    extend: 'Ext.form.Panel',
+    extend: 'Ext.Panel',
     config: {
-      html: 'This is settings'
+      loadingText: "Loading courses...",
+      layout: 'fit',
+      items: [
+        {
+          xtype: 'list',
+          store: 'Courses',
+          itemTpl: '{code} {name}'
+        }
+      ],
     },
     title: 'Settings',
     iconCls: 'settings',

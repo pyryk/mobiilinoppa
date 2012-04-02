@@ -1,8 +1,14 @@
 Ext.define('MobileNoppa.store.CourseItems', {
   extend: 'Ext.data.Store',
-  model: 'Course',
-  /*data: [
-    { id: 'T-111.5360', name: 'WWW Applications P' },
-    { id: 'T-111.5900', name: 'Experimental User Interfaces P' },
-  ]*/
+  requires: [
+    'Ext.data.proxy.LocalStorage',
+  ],
+  config: {
+    model: 'MobileNoppa.model.CourseItem',
+    autoLoad: true,
+    
+    sorters: ['date'],
+    groupField: 'date',
+    groupDir: 'ASC',
+  }
 });
