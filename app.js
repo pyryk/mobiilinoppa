@@ -7,9 +7,14 @@ window.mobilenoppa.app = Ext.application({
     controllers: ['Courses', 'CourseSettings'],
     stores: ['Courses', 'CourseItems'],
     launch: function() {
-      var titlebar = Ext.create('Ext.Toolbar', {
+      var titlebar = Ext.create('Ext.TitleBar', {
         title: 'Mobile Noppa',
-        docked: 'top'
+        docked: 'top',
+        items: [{  
+            text: 'Load',
+            align: 'right',
+            action: 'loadCourseItems'
+        }]
       });
       
       var calendar = Ext.create('MobileNoppa.view.Calendar', {
@@ -28,7 +33,6 @@ window.mobilenoppa.app = Ext.application({
       Ext.create("Ext.tab.Panel", {
         fullscreen: true,
         tabBarPosition: 'bottom',
-        title: "Mobile Noppa",
         items: [
           titlebar, 
           calendar,
