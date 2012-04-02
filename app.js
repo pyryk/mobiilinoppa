@@ -9,7 +9,8 @@ window.mobilenoppa.app = Ext.application({
     launch: function() {
       var titlebar = Ext.create('Ext.Toolbar', {
         title: 'Mobile Noppa',
-        docked: 'top'
+        docked: 'top',
+        id: 'header'
       });
       
       var calendar = Ext.create('MobileNoppa.view.Calendar', {
