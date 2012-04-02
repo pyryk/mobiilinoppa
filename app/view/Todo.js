@@ -1,15 +1,25 @@
 Ext.define('MobileNoppa.view.Todo', {
-  extend: 'Ext.List',
-    store: {
-        fields: ['date','name'],
-        data: [
-            {name: 'Experimental UIs assignment 2', date: new Date()},
-            {name: 'Studio X business model canvas', date: new Date()},
-            {name: 'Studio X prototype', date: new Date()},
-            {name: 'WWW Applications prototype', date: new Date()}
-        ]
-    },
+  extend: 'Ext.Panel',
     title: 'To-Do',
     iconCls: 'favorites',
-    itemTpl: '{name} <span style="color: #bbb;">{date}</span>'
+    itemTpl: '{name} <span style="color: #bbb;">{date}</span>',
+    config: {
+      loadingText: "Loading courses...",
+      layout: 'fit',
+      items: [
+        {
+          xtype: 'list',
+          store: 'CourseItems',
+          grouped: true,
+          itemTpl: '{title} <span class="description">{date}</span>'
+        }
+      ],
+    },
+    show: function() {
+      this.callParent(arguments);
+      console.log('todo shown');
+      // calendar includes all course items
+      Ext.getStore('CourseItems').clearFilter();
+      Ext.getStore('CourseItems').filter('type', 'assignment');
+    }
 });

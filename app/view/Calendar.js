@@ -10,10 +10,17 @@ Ext.define('MobileNoppa.view.Calendar', {
       {
         xtype: 'list',
         store: 'CourseItems',
+        grouped: true,
         itemTpl: '{title} <span class="description">{date}</span>'
       }
     ],
   },
+  show: function() {
+    this.callParent(arguments);
+    console.log('calendar shown');
+    // calendar includes all course items
+    Ext.getStore('CourseItems').clearFilter();
+  }
   
 });
 

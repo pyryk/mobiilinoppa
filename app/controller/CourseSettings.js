@@ -25,6 +25,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       var store = Ext.getStore('Courses');
       store.add(course);
       store.sync();
+      this.getForm().reset();
       
       console.log("added a new course");
     }
