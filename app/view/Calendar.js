@@ -1,7 +1,7 @@
 Ext.define('MobileNoppa.view.Calendar', {
   extend: 'Ext.Panel',
   id: 'calendar',
-  alias: 'calendar',
+  alias: 'widget.calendar',
   fullscreen: true,
   config: {
     loadingText: "Loading courses...",

@@ -4,7 +4,7 @@ window.mobilenoppa.app = Ext.application({
     name: 'MobileNoppa',
     models: ['Course', 'CourseItem'],
     views: ['Calendar', 'Todo', 'CourseSettings'],
-    controllers: ['Courses'],
+    controllers: ['Courses', 'CourseSettings'],
     stores: ['Courses', 'CourseItems'],
     launch: function() {
       var titlebar = Ext.create('Ext.Toolbar', {
