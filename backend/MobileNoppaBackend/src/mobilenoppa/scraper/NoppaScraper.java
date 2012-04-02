@@ -25,6 +25,7 @@ public class NoppaScraper {
 		}
 		
 		AllResults results = new AllResults();
+		results.name = getCourseName(courseID);
 		results.lectures = getLectures(frontPage, lecturesPage);
 		results.exams = getExams(frontPage);
 		results.exerciseGroups = getExerciseGroups(frontPage);
@@ -80,6 +81,18 @@ public class NoppaScraper {
 		}
 		
 		return getAssignments(frontPage);
+	}
+	
+	public static String getCourseName(String courseID) {
+		Document frontPage;
+		try {
+			frontPage = getFrontPage(courseID);
+		}
+		catch (IOException e) {
+			return "";
+		}
+		
+		return getCourseName(frontPage);
 	}
 
 	// --------------------------------------------------------------------------
@@ -192,6 +205,16 @@ public class NoppaScraper {
 		assignment.title = tr.child(3).text();
 		
 		return assignment;
+	}
+	
+	private static String getCourseName(Document frontPage) {
+		Elements titleElem = frontPage.select("title");
+		String titleStr = titleElem.text();
+		String[] tokens = titleStr.split("-");
+		tokens[1] = tokens[1].trim();
+		String title = tokens[0] + "-" + tokens[1];
+
+		return title;
 	}
 
 	private static Document getFrontPage(String courseID) throws IOException {
