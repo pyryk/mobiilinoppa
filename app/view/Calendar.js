@@ -10,6 +10,7 @@ Ext.define('MobileNoppa.view.Calendar', {
       {
         xtype: 'list',
         store: 'CourseItems',
+        grouped: true,
         itemTpl: '{title} <span class="description">{date}</span>'
       }
     ],

@@ -8,7 +8,13 @@ Ext.define('MobileNoppa.store.CourseItems', {
     autoLoad: true,
     
     sorters: ['date'],
-    groupField: 'date',
+//    groupField: 'date',
+    grouper: {
+      groupFn: function (item) {
+        var date = moment(item.get('date'));
+        return date.calendar().split(" ")[0];
+      }
+    },
     groupDir: 'ASC',
   }
 });
