@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.ws.rs.*;
 
-import mobilenoppa.model.Event;
+import mobilenoppa.model.Lecture;
 import mobilenoppa.scraper.NoppaScraper;
 
 
@@ -18,7 +18,7 @@ public class LecturesResource {
 	
    @GET
    @Produces(Resources.CONTENT_TYPE)
-   public List<Event> getMessage(){
+   public List<Lecture> getMessage(){
    	return NoppaScraper.getLectures(courseID);
    }
 }
