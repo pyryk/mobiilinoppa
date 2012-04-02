@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.ws.rs.*;
 
-import mobilenoppa.model.Event;
+import mobilenoppa.model.Assignment;
 import mobilenoppa.scraper.NoppaScraper;
 
 
@@ -18,7 +18,7 @@ public class AssignmentsResource {
 	
    @GET
    @Produces(Resources.CONTENT_TYPE)
-   public List<Event> getMessage(){
+   public List<Assignment> getMessage(){
    	return NoppaScraper.getAssignments(courseID);
    }
 }

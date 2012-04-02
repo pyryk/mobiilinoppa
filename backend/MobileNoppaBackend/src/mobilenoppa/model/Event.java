@@ -5,7 +5,7 @@ package mobilenoppa.model;
  * @author verkel
  */
 
-public class Event extends CourseItem {
+public abstract class Event extends CourseItem {
 	public String location;
 	public String duration;
 }
