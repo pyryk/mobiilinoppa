@@ -15,6 +15,12 @@ Ext.define('MobileNoppa.view.Calendar', {
       }
     ],
   },
+  show: function() {
+    this.callParent(arguments);
+    console.log('calendar shown');
+    // calendar includes all course items
+    Ext.getStore('CourseItems').clearFilter();
+  }
   
 });
 

@@ -8,7 +8,6 @@ Ext.define('MobileNoppa.store.CourseItems', {
     autoLoad: true,
     
     sorters: ['date'],
-//    groupField: 'date',
     grouper: {
       groupFn: function (item) {
         var date = moment(item.get('date'));

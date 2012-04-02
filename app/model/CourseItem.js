@@ -3,7 +3,7 @@ Ext.define('MobileNoppa.model.CourseItem', {
   extend: 'Ext.data.Model',
   
   config: {
-    fields: ["id", "title", "description", "date"
+    fields: ["id", "title", "description", "date", "type"
      //'id', 'title', 'date', 'description', 'type' 
     ],
     proxy: {
