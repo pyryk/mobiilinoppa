@@ -1,8 +1,8 @@
 Ext.define('MobileNoppa.store.CourseItems', {
   extend: 'Ext.data.Store',
-  requires: [
+  /*requires: [
     'Ext.data.proxy.LocalStorage',
-  ],
+  ],*/
   config: {
     model: 'MobileNoppa.model.CourseItem',
     autoLoad: true,
@@ -11,7 +11,11 @@ Ext.define('MobileNoppa.store.CourseItems', {
     grouper: {
       groupFn: function (item) {
         var date = moment(item.get('date'));
-        return date.calendar().split(" ")[0];
+        if(date){
+        	return date.calendar().split(" ")[0];
+        } else {
+        	return "";
+        }
       }
     },
     groupDir: 'ASC',
