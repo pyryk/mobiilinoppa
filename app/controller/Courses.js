@@ -25,13 +25,17 @@ Ext.define('MobileNoppa.controller.Courses', {
     loadCourseItems: function() {
 		console.log("[MobileNoppa.controller.Courses] loadCourseItems");
 		
+		Ext.Viewport.setMasked({
+			xtype: 'loadmask',
+			message: 'Loading course data'
+		});
+		
 		var CourseStore = Ext.getStore('Courses');
 		var CourseItemStore = Ext.getStore('CourseItems');
 		CourseItemStore.removeAll();
 		
 		var course = CourseStore.data.last();
 		if (course){
-		
 			CourseStore.each(function(item){
 				var code = item.get("code");
 				console.log("Loading course" + code);
@@ -46,6 +50,7 @@ Ext.define('MobileNoppa.controller.Courses', {
 							CourseItemStore.add(json.courseItems);
 							CourseItemStore.sync();
 						}
+						Ext.Viewport.setMasked(false);
 					}
 				});
 			});	
