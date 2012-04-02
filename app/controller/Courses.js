@@ -27,6 +27,7 @@ Ext.define('MobileNoppa.controller.Courses', {
 		
 		var CourseStore = Ext.getStore('Courses');
 		var CourseItemStore = Ext.getStore('CourseItems');
+		CourseItemStore.removeAll();
 		
 		var course = CourseStore.data.last();
 		if (course){
@@ -43,12 +44,13 @@ Ext.define('MobileNoppa.controller.Courses', {
 						//console.log(text,json);
 						if (json && json.courseItems){
 							CourseItemStore.add(json.courseItems);
+							CourseItemStore.sync();
 						}
 					}
 				});
 			});	
 		}
 		
-		CourseItemStore.sync();
+		
     }
 });
