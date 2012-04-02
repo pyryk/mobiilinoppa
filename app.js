@@ -11,8 +11,10 @@ window.mobilenoppa.app = Ext.application({
         title: 'Mobile Noppa',
         docked: 'top',
         items: [{  
-            text: 'Load',
+            /*text: 'Load',*/
             align: 'right',
+            iconCls: 'refresh',
+            iconMask: true,
             action: 'loadCourseItems'
         }]
       });

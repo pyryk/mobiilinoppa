@@ -11,7 +11,7 @@ Ext.define('MobileNoppa.view.Todo', {
           xtype: 'list',
           store: 'CourseItems',
           grouped: true,
-          itemTpl: '{title} <span class="description">{date}</span>'
+          itemTpl: '<div class="courseItem assignment">{title}</div>'
         }
       ],
     },
