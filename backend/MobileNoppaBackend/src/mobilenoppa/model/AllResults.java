@@ -9,8 +9,10 @@ import java.util.List;
 public class AllResults {
 
 	public String name;
-	public List<Event> lectures;
-	public List<Event> exams;
-	public List<Event> exerciseGroups;
-	public List<Event> assignments;
+	public List<CourseItem> courseItems;
+	
+//	public List<Event> lectures;
+//	public List<Event> exams;
+//	public List<Event> exerciseGroups;
+//	public List<Event> assignments;
 }

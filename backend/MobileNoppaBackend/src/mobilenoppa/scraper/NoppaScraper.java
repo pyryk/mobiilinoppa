@@ -24,17 +24,20 @@ public class NoppaScraper {
 			return new AllResults();
 		}
 		
+		List<CourseItem> courseItems = new ArrayList<CourseItem>();
+		courseItems.addAll(getLectures(frontPage, lecturesPage));
+		courseItems.addAll(getExams(frontPage));
+//		courseItems.addAll(getExerciseGroups(frontPage));
+		courseItems.addAll(getAssignments(frontPage));
+		
 		AllResults results = new AllResults();
 		results.name = getCourseName(courseID);
-		results.lectures = getLectures(frontPage, lecturesPage);
-		results.exams = getExams(frontPage);
-		results.exerciseGroups = getExerciseGroups(frontPage);
-		results.assignments = getAssignments(frontPage);
+		results.courseItems = courseItems;
 		
 		return results;
 	}
 	
-	public static List<Event> getLectures(String courseID) {
+	public static List<Lecture> getLectures(String courseID) {
 		Document frontPage, lecturesPage;
 		try {
 			frontPage = getFrontPage(courseID);
@@ -47,7 +50,7 @@ public class NoppaScraper {
 		return getLectures(frontPage, lecturesPage);
 	}
 	
-	public static List<Event> getExams(String courseID) {
+	public static List<Exam> getExams(String courseID) {
 		Document frontPage;
 		try {
 			frontPage = getFrontPage(courseID);
@@ -57,6 +60,18 @@ public class NoppaScraper {
 		}
 		
 		return getExams(frontPage);
+	}
+	
+	public static List<Assignment> getAssignments(String courseID) {
+		Document frontPage;
+		try {
+			frontPage = getFrontPage(courseID);
+		}
+		catch (IOException e) {
+			return Collections.emptyList();
+		}
+		
+		return getAssignments(frontPage);
 	}
 	
 	public static List<Event> getExerciseGroups(String courseID) {
@@ -69,18 +84,6 @@ public class NoppaScraper {
 		}
 		
 		return getExerciseGroups(frontPage);
-	}
-	
-	public static List<Event> getAssignments(String courseID) {
-		Document frontPage;
-		try {
-			frontPage = getFrontPage(courseID);
-		}
-		catch (IOException e) {
-			return Collections.emptyList();
-		}
-		
-		return getAssignments(frontPage);
 	}
 	
 	public static String getCourseName(String courseID) {
@@ -99,10 +102,10 @@ public class NoppaScraper {
 	// Implementation
 	// --------------------------------------------------------------------------
 	
-	private static List<Event> getLectures(Document frontPage, Document lecturesPage) {
+	private static List<Lecture> getLectures(Document frontPage, Document lecturesPage) {
 		if (!getLecturesExist(frontPage)) return Collections.emptyList();
 		
-		List<Event> lectures = new ArrayList<Event>();
+		List<Lecture> lectures = new ArrayList<Lecture>();
 		
 		Elements lecturesTableRows = lecturesPage.select("table#leView > tbody > tr");
 		
@@ -112,7 +115,7 @@ public class NoppaScraper {
 			boolean lectureTr = trClass.equals("even") || trClass.equals("odd");
 			if (!lectureTr) break;
 			Element lectureDescrTr = it.next();
-			Event lecture = parseLecture(tr, lectureDescrTr);
+			Lecture lecture = parseLecture(tr, lectureDescrTr);
 			lectures.add(lecture);
 		}
 		
@@ -125,8 +128,8 @@ public class NoppaScraper {
 		return !result.isEmpty();
 	}
 	
-	private static Event parseLecture(Element lectureTr, Element lectureDescrTr) {
-		Event lecture = new Event();
+	private static Lecture parseLecture(Element lectureTr, Element lectureDescrTr) {
+		Lecture lecture = new Lecture();
 		lecture.date = lectureTr.child(0).text(); // "24 Jan 12"
 		// child(1) = week, child(2) = day
 		lecture.duration = lectureTr.child(3).text(); // "16:15-18:00"
@@ -137,21 +140,21 @@ public class NoppaScraper {
 		return lecture;
 	}
 	
-	private static List<Event> getExams(Document frontPage) {
+	private static List<Exam> getExams(Document frontPage) {
 		Elements examsTableRows = frontPage.select("h2:matches(Tentit*|Exams*) + table tr");
 
-		List<Event> exams = new ArrayList<Event>();
+		List<Exam> exams = new ArrayList<Exam>();
 		
 		for (Element tr : examsTableRows) {
-			Event exam = parseExam(tr);
+			Exam exam = parseExam(tr);
 			exams.add(exam);
 		}
 		
 		return exams;
 	}
 	
-	private static Event parseExam(Element tr) {
-		Event exam = new Event();
+	private static Exam parseExam(Element tr) {
+		Exam exam = new Exam();
 		// child(0) = day of the week
 		exam.date = tr.child(1).text();
 		exam.duration = tr.child(2).text();
@@ -175,29 +178,29 @@ public class NoppaScraper {
 	}
 	
 	private static Event parseExerciseGroup(Element tr) {
-		Event exerciseGroup = new Event();
-		// TODO parse for real
-		exerciseGroup.title = tr.text();
-		exerciseGroup.description = "Exercise groups are WIP!";
+		ExerciseSession exerciseSession = new ExerciseSession();
+		// TODO parse for real, generate exercise sessions
+		exerciseSession.title = tr.text();
+		exerciseSession.description = "Exercise groups are WIP!";
 		
-		return exerciseGroup;
+		return exerciseSession;
 	}
 	
-	private static List<Event> getAssignments(Document frontPage) {
+	private static List<Assignment> getAssignments(Document frontPage) {
 		Elements assignmentsTableRows = frontPage.select("h2:matches(Harjoitustöiden DL:t|Assignment deadlines) + table tr");
 
-		List<Event> assignments = new ArrayList<Event>();
+		List<Assignment> assignments = new ArrayList<Assignment>();
 		
 		for (Element tr : assignmentsTableRows) {
-			Event assignment = parseAssignment(tr);
+			Assignment assignment = parseAssignment(tr);
 			assignments.add(assignment);
 		}
 		
 		return assignments;
 	}
 	
-	private static Event parseAssignment(Element tr) {
-		Event assignment = new Event();
+	private static Assignment parseAssignment(Element tr) {
+		Assignment assignment = new Assignment();
 		// child(0) = day of the week
 		assignment.date = tr.child(1).text();
 		// child(2) = due time
