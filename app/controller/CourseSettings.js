@@ -3,8 +3,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
 
     config: {
         refs: {
-            form: '#newcourseform',
-            panel: '#coursesettings'
+            form: '#newcourseform'
         },
         control: {
             '#add-new-button': {
@@ -15,7 +14,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
     launch: function() {
       this.callParent();
       console.log("coursesettings launch");
-      
+      //Ext.getStore("Courses").load();
     },
     init: function() {
       this.callParent();
@@ -29,11 +28,5 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       this.getForm().reset();
       
       console.log("added a new course");
-    },
-    settingsShown: function() {
-      console.log('settings shown');
-    },
-    settingsHidden: function() {
-      console.log('settings hidden');
     }
 });
