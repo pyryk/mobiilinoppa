@@ -8,6 +8,7 @@ import java.util.List;
 
 public class AllResults {
 
+	public String name;
 	public List<Event> lectures;
 	public List<Event> exams;
 	public List<Event> exerciseGroups;
