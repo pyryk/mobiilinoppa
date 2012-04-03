@@ -1,8 +1,8 @@
 Ext.define('MobileNoppa.store.CourseItems', {
   extend: 'Ext.data.Store',
-  /*requires: [
+  requires: [
     'Ext.data.proxy.LocalStorage',
-  ],*/
+  ],
   config: {
     model: 'MobileNoppa.model.CourseItem',
     autoLoad: true,

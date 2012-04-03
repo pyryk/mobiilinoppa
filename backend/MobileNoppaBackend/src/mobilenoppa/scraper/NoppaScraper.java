@@ -1,5 +1,6 @@
 package mobilenoppa.scraper;
 import java.io.IOException;
+import java.text.*;
 import java.util.*;
 
 import mobilenoppa.model.*;
@@ -130,7 +131,7 @@ public class NoppaScraper {
 	
 	private static Lecture parseLecture(Element lectureTr, Element lectureDescrTr) {
 		Lecture lecture = new Lecture();
-		lecture.date = lectureTr.child(0).text(); // "24 Jan 12"
+		lecture.date = normalizeDate(lectureTr.child(0).text()); // "24 Jan 12"
 		// child(1) = week, child(2) = day
 		lecture.duration = lectureTr.child(3).text(); // "16:15-18:00"
 		lecture.location = lectureTr.child(4).text(); // "T5"
@@ -156,7 +157,7 @@ public class NoppaScraper {
 	private static Exam parseExam(Element tr) {
 		Exam exam = new Exam();
 		// child(0) = day of the week
-		exam.date = tr.child(1).text();
+		exam.date = normalizeDate(tr.child(1).text());
 		exam.duration = tr.child(2).text();
 		exam.location = tr.child(3).text();
 		exam.title = tr.child(4).text();
@@ -202,7 +203,7 @@ public class NoppaScraper {
 	private static Assignment parseAssignment(Element tr) {
 		Assignment assignment = new Assignment();
 		// child(0) = day of the week
-		assignment.date = tr.child(1).text();
+		assignment.date = normalizeDate(tr.child(1).text());
 		// child(2) = due time
 		// TODO merge due time with due date!
 		assignment.title = tr.child(3).text();
@@ -233,5 +234,18 @@ public class NoppaScraper {
 			.userAgent("Noppa Scraper")
 			//.data("param", "value")
 			.get();
+	}
+	
+	private static final SimpleDateFormat dateFormatFin = new SimpleDateFormat("dd.MM.yy");
+	private static final SimpleDateFormat dateFormatEng = new SimpleDateFormat("dd MMM yy", Locale.US);
+	
+	private static String normalizeDate(String dateStr) {
+		try {
+			Date date = dateFormatFin.parse(dateStr);
+			return dateFormatEng.format(date);
+		}
+		catch (ParseException e) {
+			return dateStr;
+		}
 	}
 }

@@ -1,4 +1,23 @@
 .description {
-  margin-left: 10px;
+  margin-left: 0px;
   color: #aaa;
+}
+
+.courseItem {
+	padding-left: 40px;
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: 30px;
+}
+
+.courseItem.lecture {
+	background-image: url("touch/resources/themes/images/default/pictos/time.png");
+}
+
+.courseItem.assignment {
+	background-image: url("touch/resources/themes/images/default/pictos/event_complete.png");
+}
+
+.x-navigation-bar .x-toolbar-inner {
+	background: url("images/aalto.png") no-repeat 5px;
 }

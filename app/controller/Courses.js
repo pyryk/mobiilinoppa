@@ -3,12 +3,13 @@ Ext.define('MobileNoppa.controller.Courses', {
 
     config: {
         refs: {
-            calendar: 'widget.calendar'
+            calendar: 'widget.calendar',
+            loadButton: 'button[action=loadCourseItems]'
         },
         control: {
-            /*button: {
-                tap: 'addNew'
-            }*/
+            loadButton: {
+                tap: 'loadCourseItems'
+            }
         }
     },
     launch: function() {
@@ -18,10 +19,48 @@ Ext.define('MobileNoppa.controller.Courses', {
     },
     init: function() {
       this.callParent();
-      console.log("init");
+      console.log("[MobileNoppa.controller.Courses] init");
+      //this.loadCourseItems();
     },
-    addNew: function() {
-      console.log("adding a new course");
-      //Ext.create('MobileNoppa.model.Course', {});
+    loadCourseItems: function() {
+		console.log("[MobileNoppa.controller.Courses] loadCourseItems");
+		
+		Ext.Viewport.setMasked({
+			xtype: 'loadmask',
+			message: 'Loading course data'
+		});
+		
+		var CourseStore = Ext.getStore('Courses');
+		var CourseItemStore = Ext.getStore('CourseItems');
+		CourseItemStore.removeAll();
+		
+		var courseLast = CourseStore.data.last();
+		if (courseLast){
+			CourseStore.each(function(course){
+				var code = course.get("code");
+				console.log("Loading course " + code, course);
+				
+				Ext.Ajax.request({
+					url: 'http://verkel.iki.fi:8080/'+code+'/all',
+					success: function(response){
+						var text = response.responseText;
+						var json = Ext.JSON.decode(text);
+						//console.log(text,json);
+						if (json && json.courseItems){
+							for(var i=0;i<json.courseItems.length;i++){
+								var courseItem = CourseItemStore.add(json.courseItems[i]);
+								courseItem[0].setCourse(course.getId());
+								console.log(courseItem,course);
+							}
+							
+							CourseItemStore.sync();
+						}
+						Ext.Viewport.setMasked(false);
+					}
+				});
+			});	
+		}
+		
+		
     }
 });
