@@ -2,6 +2,7 @@ Ext.define('MobileNoppa.view.CourseItemList', {
   extend: 'Ext.List',
   alias: 'widget.courseitemlist',
   config: {
+    disableSelection: true
   },
   prepareData: function(data, index, item) {
     var parentData = this.callParent(arguments);
