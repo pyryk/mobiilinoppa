@@ -5,6 +5,7 @@ Ext.define('MobileNoppa.model.CourseItem', {
   config: {
     fields: [
     	{ name: 'id', type: 'int' },
+    	{ name: 'course_id', type: 'int' },
     	{ name: 'title', type: 'string' },
     	{ name: 'description', type: 'string' },
     	{ name: 'date', type: 'date' },
