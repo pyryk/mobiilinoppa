@@ -8,7 +8,11 @@ Ext.define('MobileNoppa.view.CourseItemList', {
     if (!parentData.duration) {
       parentData.duration = ""/*moment(data.date).format("HH:mm")*/;
     }
-    parentData.courseName = item.getCourse().getData().name;
+    try {
+      parentData.courseName = item.getCourse().getData().name;
+    } catch(e) {
+      parentData.courseName = "Unknown course";
+    }
     return parentData;
   },
 });
