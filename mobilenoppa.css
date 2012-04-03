@@ -1,13 +1,19 @@
-.description {
-  margin-left: 0px;
-  color: #aaa;
-}
-
 .courseItem {
 	padding-left: 40px;
 	background-repeat: no-repeat;
 	background-position: left;
 	background-size: 30px;
+}
+
+.courseItem .dateAndLocation {
+  font-size: 0.7em;
+  color: #111;
+  
+}
+
+.courseItem .courseName {
+	color: #aaa;
+	font-size: 0.7em;
 }
 
 .courseItem.lecture {

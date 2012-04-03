@@ -14,6 +14,9 @@ Ext.define('MobileNoppa.view.CourseItemList', {
     } catch(e) {
       parentData.courseName = "Unknown course";
     }
+    if(!parentData.location){
+    	parentData.location = "";
+    }
     return parentData;
   },
 });
