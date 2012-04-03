@@ -48,9 +48,11 @@ Ext.define('MobileNoppa.controller.Courses', {
 						//console.log(text,json);
 						if (json && json.courseItems){
 							for(var i=0;i<json.courseItems.length;i++){
-								var courseItem = CourseItemStore.add(json.courseItems[i]);
-								courseItem[0].setCourse(course.getId());
-								console.log(courseItem,course);
+								var jsonItem = json.courseItems[i];
+								jsonItem["course_id"] = course.getId();
+								var courseItem = CourseItemStore.add(jsonItem);
+								//courseItem[0].setCourse(course.getId());
+								console.log(jsonItem,courseItem,course);
 							}
 							
 							CourseItemStore.sync();
