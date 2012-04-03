@@ -12,11 +12,13 @@ Ext.define('MobileNoppa.store.CourseItems', {
       groupFn: function (item) {
         var date = moment(item.get('date'));
         if(date){
-        	return date.calendar().split(" ")[0];
+          // strip the time
+        	return date.calendar().replace(/( at)? \d\d:\d\d (am|pm)/i, "");
         } else {
         	return "";
         }
-      }
+      },
+      sortProperty: 'date'
     },
     groupDir: 'ASC',
   }
