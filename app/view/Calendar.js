@@ -8,10 +8,10 @@ Ext.define('MobileNoppa.view.Calendar', {
     layout: 'fit',
     items: [
       {
-        xtype: 'list',
+        xtype: 'courseitemlist',
         store: 'CourseItems',
         grouped: true,
-        itemTpl: '<div class="courseItem {type}">{title}<br /><span class="description">{duration}, course id {course_id}</span></div>'
+        itemTpl: '<div class="courseItem {type}">{title}<br /><span class="description">{duration} {courseName}</span></div>'
       }
     ],
   },

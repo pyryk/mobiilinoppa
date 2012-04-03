@@ -3,7 +3,7 @@ window.mobilenoppa = {};
 window.mobilenoppa.app = Ext.application({
     name: 'MobileNoppa',
     models: ['Course', 'CourseItem'],
-    views: ['Calendar', 'Todo', 'CourseSettings'],
+    views: ['Calendar', 'Todo', 'CourseSettings', 'CourseItemList'],
     controllers: ['Courses', 'CourseSettings'],
     stores: ['Courses', 'CourseItems'],
     launch: function() {
