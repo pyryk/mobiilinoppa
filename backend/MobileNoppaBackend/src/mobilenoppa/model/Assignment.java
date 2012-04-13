@@ -7,6 +7,8 @@ package mobilenoppa.model;
 
 public class Assignment extends CourseItem {
 
+	public String duration;
+	
 	@Override
 	public String getType() {
 		return "assignment";

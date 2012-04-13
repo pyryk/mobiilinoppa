@@ -204,8 +204,8 @@ public class NoppaScraper {
 		Assignment assignment = new Assignment();
 		// child(0) = day of the week
 		assignment.date = normalizeDate(tr.child(1).text());
-		// child(2) = due time
-		// TODO merge due time with due date!
+		String[] durationTokens = tr.child(2).text().split(" ");
+		assignment.duration = durationTokens[durationTokens.length-1];
 		assignment.title = tr.child(3).text();
 		
 		return assignment;
