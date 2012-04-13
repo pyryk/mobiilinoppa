@@ -17,15 +17,16 @@ Ext.define('MobileNoppa.view.CourseSettings', {
           items: [
             {
               xtype: "fieldset",
+              title: "Add course",
               items: [
                 {
                   xtype: "textfield",
-                  label: "Course code",
+                  label: "Code",
                   name: 'code'
                 },
                 {
                   xtype: "textfield",
-                  label: "Course name",
+                  label: "Name",
                   name: 'name'
                 },
                 {

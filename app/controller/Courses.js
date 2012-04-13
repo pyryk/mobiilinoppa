@@ -34,11 +34,11 @@ Ext.define('MobileNoppa.controller.Courses', {
 		var CourseItemStore = Ext.getStore('CourseItems');
 		CourseItemStore.removeAll();
 		
-		var course = CourseStore.data.last();
-		if (course){
-			CourseStore.each(function(item){
-				var code = item.get("code");
-				console.log("Loading course" + code);
+		var courseLast = CourseStore.data.last();
+		if (courseLast){
+			CourseStore.each(function(course){
+				var code = course.get("code");
+				console.log("Loading course " + code, course);
 				
 				Ext.Ajax.request({
 					url: 'http://verkel.iki.fi:8080/'+code+'/all',
@@ -47,7 +47,14 @@ Ext.define('MobileNoppa.controller.Courses', {
 						var json = Ext.JSON.decode(text);
 						//console.log(text,json);
 						if (json && json.courseItems){
-							CourseItemStore.add(json.courseItems);
+							for(var i=0;i<json.courseItems.length;i++){
+								var jsonItem = json.courseItems[i];
+								jsonItem["course_id"] = course.getId();
+								var courseItem = CourseItemStore.add(jsonItem);
+								//courseItem[0].setCourse(course.getId());
+								console.log(jsonItem,courseItem,course);
+							}
+							
 							CourseItemStore.sync();
 						}
 						Ext.Viewport.setMasked(false);
