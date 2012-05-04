@@ -98,11 +98,24 @@ public class NoppaScraper {
 		
 		return getCourseName(frontPage);
 	}
+	
+
+	public static List<Course> searchCourses(String query) {
+		Document searchPage;
+		try {
+			searchPage = getSearchPage(query);
+		}
+		catch (IOException e) {
+			return Collections.emptyList();
+		}
+		
+		return searchCourses(searchPage);
+	}
 
 	// --------------------------------------------------------------------------
 	// Implementation
 	// --------------------------------------------------------------------------
-	
+
 	private static List<Lecture> getLectures(Document frontPage, Document lecturesPage) {
 		if (!getLecturesExist(frontPage)) return Collections.emptyList();
 		
@@ -220,6 +233,27 @@ public class NoppaScraper {
 
 		return title;
 	}
+	
+	
+	private static List<Course> searchCourses(Document searchPage) {
+		List<Course> results = new ArrayList<Course>();
+		
+		Elements searchTableRows = searchPage.select("table#crsTableView > tbody").select("> tr.even, > tr.odd");
+		
+		for (Element courseTr : searchTableRows) {
+			Course course = parseCourse(courseTr);
+			results.add(course);
+		}
+		
+		return results;
+	}
+
+	private static Course parseCourse(Element courseTr) {
+		Course course = new Course();
+		course.code = courseTr.child(0).text();
+		course.name = courseTr.child(1).text();
+		return course;
+	}
 
 	private static Document getFrontPage(String courseID) throws IOException {
 		return getDocument(String.format("https://noppa.aalto.fi/noppa/kurssi/%s/etusivu", courseID));
@@ -227,6 +261,10 @@ public class NoppaScraper {
 	
 	private static Document getLecturesPage(String courseID) throws IOException {
 		return getDocument(String.format("https://noppa.aalto.fi/noppa/kurssi/%s/luennot", courseID));
+	}
+	
+	private static Document getSearchPage(String query) throws IOException {
+		return getDocument(String.format("https://noppa.aalto.fi/noppa/haku/%s", query));
 	}
 	
 	private static Document getDocument(String url) throws IOException {

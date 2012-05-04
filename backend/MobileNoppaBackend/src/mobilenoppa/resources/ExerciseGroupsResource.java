@@ -12,7 +12,7 @@ import mobilenoppa.model.Event;
 import mobilenoppa.scraper.NoppaScraper;
 
 
-@Path("/{courseID}/exerciseGroups")
+@Path("course/{courseID}/exerciseGroups")
 public class ExerciseGroupsResource {
 	@PathParam("courseID") public String courseID;
 	
