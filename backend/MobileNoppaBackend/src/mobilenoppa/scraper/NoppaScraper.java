@@ -15,7 +15,7 @@ public class NoppaScraper {
 	// Public API
 	// --------------------------------------------------------------------------
 	
-	public static AllResults getAll(String courseID, String groupID) {
+	public static AllResults getAll(String courseID, String groupIDFilter) {
 		Document frontPage, lecturesPage;
 		try {
 			frontPage = getFrontPage(courseID);
@@ -28,11 +28,12 @@ public class NoppaScraper {
 		List<CourseItem> courseItems = new ArrayList<CourseItem>();
 		courseItems.addAll(getLectures(frontPage, lecturesPage));
 		courseItems.addAll(getExams(frontPage));
-		courseItems.addAll(getExerciseSessions(frontPage, groupID));
+		courseItems.addAll(getExerciseSessions(frontPage, groupIDFilter));
 		courseItems.addAll(getAssignments(frontPage));
 		
 		AllResults results = new AllResults();
-		results.name = getCourseName(courseID);
+		results.name = getCourseName(frontPage);
+		results.exerciseGroups = getExerciseGroups(frontPage);
 		results.courseItems = courseItems;
 		
 		return results;
@@ -176,8 +177,10 @@ public class NoppaScraper {
 		return exam;
 	}
 	
+	private static final String exerciseGroupsTableRowsQuery = "h2:matches(Harjoitusryhmät|Exercise groups) + table tr";
+	
 	private static List<Event> getExerciseSessions(Document frontPage, String groupIDFilter) {
-		Elements exerciseGroupsTableRows = frontPage.select("h2:matches(Harjoitusryhmät|Exercise groups) + table tr");
+		Elements exerciseGroupsTableRows = frontPage.select(exerciseGroupsTableRowsQuery);
 
 		List<Event> exerciseSessions = new ArrayList<Event>();
 		
@@ -186,6 +189,19 @@ public class NoppaScraper {
 		}
 		
 		return exerciseSessions;
+	}
+	
+	private static List<String> getExerciseGroups(Document frontPage) {
+		Elements exerciseGroupsTableRows = frontPage.select(exerciseGroupsTableRowsQuery);
+		
+		List<String> exerciseGroups = new ArrayList<String>();
+		
+		for (Element exerciseGroupTr : exerciseGroupsTableRows) {
+			String groupName = exerciseGroupTr.child(4).text();
+			exerciseGroups.add(groupName);
+		}
+		
+		return exerciseGroups;
 	}
 	
 	private static void addExerciseSessions(Element tr, String groupIDFilter, List<Event> exerciseSessions) {
