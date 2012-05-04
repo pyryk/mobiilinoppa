@@ -88,6 +88,18 @@ public class NoppaScraper {
 		return getExerciseSessions(frontPage, groupID);
 	}
 	
+	public static List<String> getExerciseGroups(String courseID) {
+		Document frontPage;
+		try {
+			frontPage = getFrontPage(courseID);
+		}
+		catch (IOException e) {
+			return Collections.emptyList();
+		}
+		
+		return getExerciseGroups(frontPage);
+	}
+	
 	public static String getCourseName(String courseID) {
 		Document frontPage;
 		try {
