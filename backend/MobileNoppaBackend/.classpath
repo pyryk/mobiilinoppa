@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="/Libraries/lib/jackson-core-asl-1.9.2.jar"/>
 	<classpathentry kind="lib" path="/Libraries/lib/jackson-jaxrs-1.9.2.jar"/>
 	<classpathentry kind="lib" path="/Libraries/lib/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/Libraries/lib/joda-time-2.1.jar" sourcepath="/Libraries/libsrc/joda-time-2.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

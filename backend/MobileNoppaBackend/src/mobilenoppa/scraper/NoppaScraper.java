@@ -1,10 +1,10 @@
 package mobilenoppa.scraper;
 import java.io.IOException;
-import java.text.*;
 import java.util.*;
 
 import mobilenoppa.model.*;
 
+import org.joda.time.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
@@ -15,7 +15,7 @@ public class NoppaScraper {
 	// Public API
 	// --------------------------------------------------------------------------
 	
-	public static AllResults getAll(String courseID) {
+	public static AllResults getAll(String courseID, String groupID) {
 		Document frontPage, lecturesPage;
 		try {
 			frontPage = getFrontPage(courseID);
@@ -28,7 +28,7 @@ public class NoppaScraper {
 		List<CourseItem> courseItems = new ArrayList<CourseItem>();
 		courseItems.addAll(getLectures(frontPage, lecturesPage));
 		courseItems.addAll(getExams(frontPage));
-//		courseItems.addAll(getExerciseGroups(frontPage));
+		courseItems.addAll(getExerciseSessions(frontPage, groupID));
 		courseItems.addAll(getAssignments(frontPage));
 		
 		AllResults results = new AllResults();
@@ -75,7 +75,7 @@ public class NoppaScraper {
 		return getAssignments(frontPage);
 	}
 	
-	public static List<Event> getExerciseGroups(String courseID) {
+	public static List<Event> getExerciseSessions(String courseID, String groupID) {
 		Document frontPage;
 		try {
 			frontPage = getFrontPage(courseID);
@@ -84,7 +84,7 @@ public class NoppaScraper {
 			return Collections.emptyList();
 		}
 		
-		return getExerciseGroups(frontPage);
+		return getExerciseSessions(frontPage, groupID);
 	}
 	
 	public static String getCourseName(String courseID) {
@@ -99,7 +99,6 @@ public class NoppaScraper {
 		return getCourseName(frontPage);
 	}
 	
-
 	public static List<Course> searchCourses(String query) {
 		Document searchPage;
 		try {
@@ -137,14 +136,13 @@ public class NoppaScraper {
 	}
 	
 	private static boolean getLecturesExist(Document frontPage) {
-		//Elements result = frontPage.select("div#courseNaviContainer div:not(.separator) a:matches(Lectures|Luennot)");
 		Elements result = frontPage.select("div#courseNaviContainer div:not(.separator) a:matches(Lectures|Luennot)");
 		return !result.isEmpty();
 	}
 	
 	private static Lecture parseLecture(Element lectureTr, Element lectureDescrTr) {
 		Lecture lecture = new Lecture();
-		lecture.date = normalizeDate(lectureTr.child(0).text()); // "24 Jan 12"
+		lecture.date = DateUtils.normalizeDateStr(lectureTr.child(0).text()); // "24 Jan 12"
 		// child(1) = week, child(2) = day
 		lecture.duration = lectureTr.child(3).text(); // "16:15-18:00"
 		lecture.location = lectureTr.child(4).text(); // "T5"
@@ -170,7 +168,7 @@ public class NoppaScraper {
 	private static Exam parseExam(Element tr) {
 		Exam exam = new Exam();
 		// child(0) = day of the week
-		exam.date = normalizeDate(tr.child(1).text());
+		exam.date = DateUtils.normalizeDateStr(tr.child(1).text());
 		exam.duration = tr.child(2).text();
 		exam.location = tr.child(3).text();
 		exam.title = tr.child(4).text();
@@ -178,28 +176,42 @@ public class NoppaScraper {
 		return exam;
 	}
 	
-	private static List<Event> getExerciseGroups(Document frontPage) {
+	private static List<Event> getExerciseSessions(Document frontPage, String groupIDFilter) {
 		Elements exerciseGroupsTableRows = frontPage.select("h2:matches(Harjoitusryhmät|Exercise groups) + table tr");
 
-		List<Event> exerciseGroups = new ArrayList<Event>();
+		List<Event> exerciseSessions = new ArrayList<Event>();
 		
-		for (Element tr : exerciseGroupsTableRows) {
-			Event exerciseGroup = parseExerciseGroup(tr);
-			exerciseGroups.add(exerciseGroup);
+		for (Element exerciseGroupTr : exerciseGroupsTableRows) {
+			addExerciseSessions(exerciseGroupTr, groupIDFilter, exerciseSessions);
 		}
 		
-		return exerciseGroups;
+		return exerciseSessions;
 	}
 	
-	private static Event parseExerciseGroup(Element tr) {
-		ExerciseSession exerciseSession = new ExerciseSession();
-		// TODO parse for real, generate exercise sessions
-		exerciseSession.title = tr.text();
-		exerciseSession.description = "Exercise groups are WIP!";
+	private static void addExerciseSessions(Element tr, String groupIDFilter, List<Event> exerciseSessions) {
+		String weekdayStr = tr.child(0).text(); // "Ke", "Wed"
+		String sessionDurationStr = tr.child(1).text(); // "12:15-14:00"
+		String location = tr.child(2).text(); // "1K"
+		String intervalWhenHeldStr = tr.child(3).text(); // "14.03. - 09.05.2012", "07 Sep - 19 Oct 11"
+		String groupName = tr.child(4).text(); // "H1"
 		
-		return exerciseSession;
+		if (groupIDFilter != null && !groupName.equalsIgnoreCase(groupIDFilter)) return;
+		
+		int weekday = DateUtils.parseWeekday(weekdayStr);
+		Interval intervalWhenHeld = DateUtils.parseInterval(intervalWhenHeldStr);
+		DateTime start = intervalWhenHeld.getStart().withDayOfWeek(weekday);
+		DateTime end = intervalWhenHeld.getEnd();
+
+		for (DateTime date = start; date.isBefore(end); date = date.plusWeeks(1)) {
+			ExerciseSession session = new ExerciseSession();
+			session.date = DateUtils.toUsString(date);
+			session.duration = sessionDurationStr;
+			session.location = location;
+			session.description = groupName;
+			exerciseSessions.add(session);
+		}
 	}
-	
+
 	private static List<Assignment> getAssignments(Document frontPage) {
 		Elements assignmentsTableRows = frontPage.select("h2:matches(Harjoitustöiden DL:t|Assignment deadlines) + table tr");
 
@@ -216,7 +228,7 @@ public class NoppaScraper {
 	private static Assignment parseAssignment(Element tr) {
 		Assignment assignment = new Assignment();
 		// child(0) = day of the week
-		assignment.date = normalizeDate(tr.child(1).text());
+		assignment.date = DateUtils.normalizeDateStr(tr.child(1).text());
 		String[] durationTokens = tr.child(2).text().split(" ");
 		assignment.duration = durationTokens[durationTokens.length-1];
 		assignment.title = tr.child(3).text();
@@ -233,7 +245,6 @@ public class NoppaScraper {
 
 		return title;
 	}
-	
 	
 	private static List<Course> searchCourses(Document searchPage) {
 		List<Course> results = new ArrayList<Course>();
@@ -263,6 +274,10 @@ public class NoppaScraper {
 		return getDocument(String.format("https://noppa.aalto.fi/noppa/kurssi/%s/luennot", courseID));
 	}
 	
+	private static Document getOverviewPage(String courseID) throws IOException {
+		return getDocument(String.format("https://noppa.aalto.fi/noppa/kurssi/%s/esite", courseID));
+	}
+	
 	private static Document getSearchPage(String query) throws IOException {
 		return getDocument(String.format("https://noppa.aalto.fi/noppa/haku/%s", query));
 	}
@@ -270,20 +285,6 @@ public class NoppaScraper {
 	private static Document getDocument(String url) throws IOException {
 		return Jsoup.connect(url)
 			.userAgent("Noppa Scraper")
-			//.data("param", "value")
 			.get();
-	}
-	
-	private static final SimpleDateFormat dateFormatFin = new SimpleDateFormat("dd.MM.yy");
-	private static final SimpleDateFormat dateFormatEng = new SimpleDateFormat("dd MMM yy", Locale.US);
-	
-	private static String normalizeDate(String dateStr) {
-		try {
-			Date date = dateFormatFin.parse(dateStr);
-			return dateFormatEng.format(date);
-		}
-		catch (ParseException e) {
-			return dateStr;
-		}
 	}
 }

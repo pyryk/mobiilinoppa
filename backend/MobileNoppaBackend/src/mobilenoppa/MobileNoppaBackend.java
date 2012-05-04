@@ -44,7 +44,7 @@ public class MobileNoppaBackend {
        classes.add(AllResource.class);
        classes.add(NameResource.class);
        classes.add(LecturesResource.class);
-       classes.add(ExerciseGroupsResource.class);
+       classes.add(ExerciseSessionsResource.class);
        classes.add(ExamsResource.class);
        classes.add(AssignmentsResource.class);
        classes.add(SearchResource.class);
