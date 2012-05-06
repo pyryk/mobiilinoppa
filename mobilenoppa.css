@@ -31,3 +31,8 @@
 .autocomplete-list {
   background-color: white;
 }
+
+.course-list .x-list-disclosure {
+  -webkit-mask: 0 0 url('images/delete.png');
+  
+}

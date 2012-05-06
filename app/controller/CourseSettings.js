@@ -7,7 +7,8 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
             button: '#add-new-view-button',
             view: '#course-settings-view',
             search: '#search-course-field',
-            autocompletelist: '#course-autocomplete'
+            autocompletelist: '#course-autocomplete',
+            courselist: '#course-list',
         },
         control: {
             '#add-new-button': {
@@ -25,6 +26,9 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
             },
             '#course-autocomplete': {
               itemtap: 'courseSelected'
+            },
+            '#course-list': {
+              disclose: 'removeCourse'
             }
         }
     },
@@ -108,5 +112,16 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       console.log("added a new course");
       
       window.refreshCourseData();
+    },
+    removeCourse: function(list, record, target, index, event, eopts) {
+      Ext.Msg.confirm("Are you sure?", "Are you sure you want to remove this course", function(val) {
+        if (val === "yes") {
+          var store = Ext.getStore('Courses');
+          store.remove(record);
+          store.sync();
+          
+          window.refreshCourseData();
+        }
+      });
     }
 });

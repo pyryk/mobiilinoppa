@@ -11,8 +11,11 @@ Ext.define('MobileNoppa.view.CourseSettings', {
           items: [
             {
               xtype: 'list',
+              id: 'course-list',
               store: 'Courses',
+              itemCls: 'course-list',
               itemTpl: '{code} {name}',
+              onItemDisclosure: true
             },
             {
               xtype: "button",
