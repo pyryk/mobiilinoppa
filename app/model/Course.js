@@ -3,7 +3,7 @@ Ext.define('MobileNoppa.model.Course', {
   extend: 'Ext.data.Model',
 
   config: {
-    fields: ['id', 'code', 'name'],
+    fields: ['id', 'code', 'name', 'exerciseGroup'],
     proxy: {
       type: 'localstorage',
       id  : 'mobilenoppa-courses'

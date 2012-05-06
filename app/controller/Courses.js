@@ -39,9 +39,13 @@ Ext.define('MobileNoppa.controller.Courses', {
 			CourseStore.each(function(course){
 				var code = course.get("code");
 				console.log("Loading course " + code, course);
+				var url = 'http://verkel.iki.fi:8080/course/'+code+'/all';
+				if (course.get("exerciseGroup")) {
+				  url += "?group=" + course.get("exerciseGroup");
+				}
 				
 				Ext.Ajax.request({
-					url: 'http://verkel.iki.fi:8080/'+code+'/all',
+					url: url,
 					success: function(response){
 						var text = response.responseText;
 						var json = Ext.JSON.decode(text);

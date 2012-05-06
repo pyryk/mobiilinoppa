@@ -17,6 +17,9 @@ Ext.define('MobileNoppa.view.CourseItemList', {
     if(!parentData.location){
     	parentData.location = "";
     }
+    if (!parentData.title) {
+      parentData.title = parentData.description;
+    }
     return parentData;
   },
 });
