@@ -106,5 +106,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       this.getView('#course-settings-view').setActiveItem(0);
       
       console.log("added a new course");
+      
+      window.refreshCourseData();
     }
 });
