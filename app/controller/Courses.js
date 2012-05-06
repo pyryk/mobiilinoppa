@@ -4,12 +4,16 @@ Ext.define('MobileNoppa.controller.Courses', {
     config: {
         refs: {
             calendar: 'widget.calendar',
-            loadButton: 'button[action=loadCourseItems]'
+            loadButton: 'button[action=loadCourseItems]',
+            calendar: '#calendarlist'
         },
         control: {
-            loadButton: {
-                tap: 'loadCourseItems'
-            }
+          '#calendarlist': {
+            updatedata: 'updateData'
+          },
+          loadButton: {
+            tap: 'loadCourseItems'
+          }
         }
     },
     launch: function() {
@@ -24,5 +28,8 @@ Ext.define('MobileNoppa.controller.Courses', {
     },
     loadCourseItems: function() {
       window.refreshCourseData();
-    }
+    },
+    updateData: function() {
+      console.log('data updated');
+    },
 });
