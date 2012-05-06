@@ -2,44 +2,37 @@ Ext.define('MobileNoppa.view.CourseSettings', {
     extend: 'Ext.Panel',
     config: {
       loadingText: "Loading courses...",
-      layout: 'vbox',
+      layout: 'card',
+      id: 'course-settings-view',
       items: [
         {
-          xtype: 'list',
-          store: 'Courses',
-          itemTpl: '{code} {name}',
-          flex: 1,
-        },
-        {
-          xtype: "formpanel",
-          flex: 1,
-          id: 'newcourseform',
+          xtype: 'panel',
+          layout: 'fit',
           items: [
             {
-              xtype: "fieldset",
-              title: "Add course",
-              items: [
-                {
-                  xtype: "textfield",
-                  label: "Code",
-                  name: 'code'
-                },
-                {
-                  xtype: "textfield",
-                  label: "Name",
-                  name: 'name'
-                },
-                {
-                  xtype: "button",
-                  alias: 'widget.newcourse',
-                  id: 'add-new-button',
-                  text: "Add",
-                  ui: "action"
-                },
-              ]
-            }
-          ]
-        }
+              xtype: 'list',
+              id: 'course-list',
+              store: 'Courses',
+              itemCls: 'course-list',
+              itemTpl: '{code} {name}',
+              onItemDisclosure: true
+            },
+            {
+              xtype: "button",
+              alias: 'widget.addnewcourse',
+              id: 'add-new-view-button',
+              padding: 5,
+              margin: 10,
+              text: "Add new",
+              ui: "action",
+              docked: 'bottom',
+            },
+          ],
+        },
+        {
+          xtype: 'addnewcourse',
+        },
+        
       ],
     },
     title: 'Settings',

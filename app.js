@@ -3,9 +3,9 @@ window.mobilenoppa = {};
 window.mobilenoppa.app = Ext.application({
     name: 'MobileNoppa',
     models: ['Course', 'CourseItem'],
-    views: ['Calendar', 'Todo', 'CourseSettings', 'CourseItemList'],
+    views: ['Calendar', 'Todo', 'CourseSettings', 'CourseItemList', 'AddNew'],
     controllers: ['Courses', 'CourseSettings'],
-    stores: ['Courses', 'CourseItems'],
+    stores: ['Courses', 'CourseItems', 'CourseAutocomplete'],
     launch: function() {
       var titlebar = Ext.create('Ext.TitleBar', {
         title: 'Mobile Noppa',
@@ -39,7 +39,7 @@ window.mobilenoppa.app = Ext.application({
           titlebar, 
           calendar,
           todo,
-          settings
+          settings,
         ],
         });
     }

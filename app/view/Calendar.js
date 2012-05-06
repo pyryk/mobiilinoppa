@@ -10,6 +10,7 @@ Ext.define('MobileNoppa.view.Calendar', {
       {
         xtype: 'courseitemlist',
         store: 'CourseItems',
+        id: 'calendarlist',
         grouped: true,
         itemTpl: '<div class="courseItem {type}">'
         	+'{title}<br />'
@@ -23,18 +24,14 @@ Ext.define('MobileNoppa.view.Calendar', {
     console.log('calendar shown');
     // calendar includes all course items
     Ext.getStore('CourseItems').clearFilter();
+    Ext.getStore('CourseItems').filterBy(function(record, id) {
+      var today = new Date();
+      today.setHours(0,0,0,0);
+      return record.get('date') >= today;
+    });
+  },
+  initialize: function() {
+    console.log('initializing calendar');
   }
   
 });
-
-/*Ext.onReady(function() {
-    CourseStore = Ext.create('Ext.data.Store', {
-        model: 'MobileNoppa.model.Course',
-        autoLoad: true,
-
-        proxy: {
-            type: 'localstorage',
-            id: 'mobilenoppa-courses',
-        }
-    });
-});*/

@@ -21,5 +21,10 @@ Ext.define('MobileNoppa.view.Todo', {
       // calendar includes all course items
       Ext.getStore('CourseItems').clearFilter();
       Ext.getStore('CourseItems').filter('type', 'assignment');
+      Ext.getStore('CourseItems').filterBy(function(record, id) {
+        var today = new Date();
+        today.setHours(0,0,0,0);
+        return record.get('date') >= today;
+      });
     }
 });
