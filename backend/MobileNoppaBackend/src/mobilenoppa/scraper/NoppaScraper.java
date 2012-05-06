@@ -115,6 +115,12 @@ public class NoppaScraper {
 	public static List<Course> searchCourses(String query) {
 		Document searchPage;
 		try {
+			/*
+			 * Spaces mean OR in Noppa. If spaces are replaced with _, Noppa will
+			 * search the whole sentence. So replace any amount of continuous
+			 * whitespace with _.
+			 */
+			query = query.replaceAll("\\s+", "_"); 
 			searchPage = getSearchPage(query);
 		}
 		catch (IOException e) {
