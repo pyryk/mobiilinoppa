@@ -5,7 +5,7 @@ window.mobilenoppa.app = Ext.application({
     models: ['Course', 'CourseItem'],
     views: ['Calendar', 'Todo', 'CourseSettings', 'CourseItemList', 'AddNew'],
     controllers: ['Courses', 'CourseSettings'],
-    stores: ['Courses', 'CourseItems'],
+    stores: ['Courses', 'CourseItems', 'CourseAutocomplete'],
     launch: function() {
       var titlebar = Ext.create('Ext.TitleBar', {
         title: 'Mobile Noppa',

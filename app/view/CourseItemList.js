@@ -2,7 +2,8 @@ Ext.define('MobileNoppa.view.CourseItemList', {
   extend: 'Ext.List',
   alias: 'widget.courseitemlist',
   config: {
-    disableSelection: true
+    disableSelection: true,
+    emptyText: "No course items found! Please check your courses."
   },
   prepareData: function(data, index, item) {
     var parentData = this.callParent(arguments);

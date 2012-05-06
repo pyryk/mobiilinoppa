@@ -12,7 +12,28 @@ Ext.define('MobileNoppa.view.AddNew', {
           items: [
             {
               xtype: "fieldset",
-              title: "Add a course",
+              title: "Search for a course",
+              items: [
+                {
+                  xtype: "searchfield",
+                  label: "Search",
+                  name: 'query',
+                  id: 'search-course-field'
+                },
+                {
+                  xtype: 'list',
+                  id: 'course-autocomplete',
+                  store: 'CourseAutocomplete',
+                  itemCls: 'autocomplete-list',
+                  itemTpl: '{code} {name}',
+                  height: 0,
+                  padding: 0,
+                }
+              ],
+            },
+            {
+              xtype: "fieldset",
+              title: "Or enter info manually",
               items: [
                 {
                   xtype: "textfield",

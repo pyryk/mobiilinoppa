@@ -27,3 +27,7 @@
 .x-navigation-bar .x-toolbar-inner {
 	background: url("images/aalto.png") no-repeat 5px;
 }
+
+.autocomplete-list {
+  background-color: white;
+}

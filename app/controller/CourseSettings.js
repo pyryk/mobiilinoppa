@@ -5,7 +5,9 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
         refs: {
             form: '#newcourseform',
             button: '#add-new-view-button',
-            view: '#course-settings-view'
+            view: '#course-settings-view',
+            search: '#search-course-field',
+            autocompletelist: '#course-autocomplete'
         },
         control: {
             '#add-new-button': {
@@ -16,6 +18,13 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
             },
             '#back-to-course-list-button': {
               tap: 'displayCourseList'
+            },
+            '#search-course-field': {
+              keyup: 'searchCourses',
+              clearicontap: 'clearSearch'
+            },
+            '#course-autocomplete': {
+              itemtap: 'courseSelected'
             }
         }
     },
@@ -28,12 +37,60 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       this.callParent();
       console.log("coursesettings init");
     },
+    searchCourses: function(field) {
+      var val = field.getValue();
+      console.log('search courses with', val);
+      
+      var app = this;
+      var CourseAutocomplete = Ext.getStore('CourseAutocomplete');
+      CourseAutocomplete.removeAll();
+      
+      // dont search with less than 3 characters
+      if (val.length > 2) {
+        var url = 'http://verkel.iki.fi:8080/search/'+val+'';
+        Ext.Ajax.request({
+  				url: url,
+  				success: function(response){
+  					var text = response.responseText;
+						var json = Ext.JSON.decode(text);
+						var view = app.getView('#course-autocomplete');
+						//view.items = [];
+						for (var i in json) {
+						  console.log('adding course',json[i]);
+						  var course = CourseAutocomplete.add(json[i]);
+						}
+						var height = Math.max(json.length*47-1, 0);
+						Ext.getCmp('course-autocomplete').setHeight(height);
+						
+						console.log("Success",json);
+  				},
+  				failure: function(response){
+  				  console.log("Failure",response);
+  				}
+  			});
+      } else {
+        Ext.getCmp('course-autocomplete').setHeight(0);
+      }
+    },
+    courseSelected: function(list, index, target, record, event) {
+      window.args = arguments;
+      console.log('Course el tapped', arguments);
+      console.log(record.get('code'));
+      this.getForm().setRecord(record);
+      this.clearSearch();
+    },
+    clearSearch: function() {
+      this.getForm().setValues({
+        query: ''
+      });
+      Ext.getStore('CourseAutocomplete').removeAll();
+      Ext.getCmp('course-autocomplete').setHeight(0);
+    },
     displayCourseList: function(btn) {
       console.log('displaying the course list');
       this.getView('#course-settings-view').setActiveItem(0);
     },
     displayAddNew: function(btn) {
-      window.thething = this;
       console.log('displaying the add new form');
       this.getView('#course-settings-view').setActiveItem(1);
       this.getForm().reset();
