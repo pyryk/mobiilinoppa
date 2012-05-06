@@ -28,6 +28,7 @@ Ext.define('MobileNoppa.view.AddNew', {
                   itemTpl: '{code} {name}',
                   height: 0,
                   padding: 0,
+                  scrollable: false,
                 }
               ],
             },

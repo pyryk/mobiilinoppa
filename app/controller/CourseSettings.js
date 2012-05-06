@@ -55,6 +55,10 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
         Ext.Ajax.request({
   				url: url,
   				success: function(response){
+  				  if (val != field.getValue()) {
+  				    console.log('old request - not updating the view');
+  				    return;
+  				  }
   					var text = response.responseText;
 						var json = Ext.JSON.decode(text);
 						var view = app.getView('#course-autocomplete');
