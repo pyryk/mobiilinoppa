@@ -9,7 +9,7 @@
         <jar destfile="build/MobileNoppaBackend/MobileMoppaBackend.jar">
             <manifest>
                 <attribute name="Main-Class" value="mobilenoppa.MobileNoppaBackend"/>
-                <attribute name="Class-Path" value=". jsoup-1.6.1.jar jersey-simple-server-1.8.jar simple-4.1.21.jar jersey-bundle-1.12.jar jsr311-api-1.1.1.jar jackson-core-asl-1.9.2.jar jackson-jaxrs-1.9.2.jar jackson-mapper-asl-1.9.2.jar"/>
+                <attribute name="Class-Path" value=". jsoup-1.6.1.jar jersey-simple-server-1.8.jar simple-4.1.21.jar jersey-bundle-1.12.jar jsr311-api-1.1.1.jar jackson-core-asl-1.9.2.jar jackson-jaxrs-1.9.2.jar jackson-mapper-asl-1.9.2.jar joda-time-2.1.jar"/>
             </manifest>
             <fileset dir="bin"/>
         </jar>
@@ -21,6 +21,7 @@
         <copy file="../Libraries/lib/jackson-core-asl-1.9.2.jar" todir="build/MobileNoppaBackend"/>
         <copy file="../Libraries/lib/jackson-jaxrs-1.9.2.jar" todir="build/MobileNoppaBackend"/>
         <copy file="../Libraries/lib/jackson-mapper-asl-1.9.2.jar" todir="build/MobileNoppaBackend"/>
+        <copy file="../Libraries/lib/joda-time-2.1.jar" todir="build/MobileNoppaBackend"/>
     </target>
 	<target name="clean">
 		<delete dir="build" />

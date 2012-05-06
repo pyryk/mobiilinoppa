@@ -8,17 +8,18 @@ import java.util.List;
 
 import javax.ws.rs.*;
 
-import mobilenoppa.model.Lecture;
+import mobilenoppa.model.Event;
 import mobilenoppa.scraper.NoppaScraper;
 
 
-@Path("course/{courseID}/lectures")
-public class LecturesResource {
+@Path("course/{courseID}/exerciseSessions")
+public class ExerciseSessionsResource {
 	@PathParam("courseID") public String courseID;
+	@QueryParam("group") public String groupID;
 	
    @GET
    @Produces(Resources.CONTENT_TYPE)
-   public List<Lecture> getMessage(){
-   	return NoppaScraper.getLectures(courseID);
+   public List<Event> getMessage(){
+   	return NoppaScraper.getExerciseSessions(courseID, groupID);
    }
 }

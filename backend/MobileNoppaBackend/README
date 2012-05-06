@@ -1,0 +1,35 @@
+Käytössä olevat urlit ovat:
+
+* course/{courseID}/all
+* course/{courseID}/all?group={groupID}
+	- Näyttää kurssin nimen, harjoitusryhmien nimet ja kurssin tapahtumat
+	- Kaikki mitä yksittäisillä urleilla voi hakea sisältyy all-urliin, lukuunottamatta kurssihakua
+	- Harjoitusryhmätapaamisia voi filtteröidä group-parametrilla
+	
+* course/{courseID}/assignments
+	- Näyttää harjoitustyöt
+	
+* course/{courseID}/exams
+	- Näyttää tentit
+	
+* course/{courseID}/exerciseGroups
+	- Näyttää harjoitusryhmien nimet
+	
+* course/{courseID}/exerciseSessions
+* course/{courseID}/exerciseSessions?group={groupID}
+	- Näyttää harjoitusryhmien tapaamiset
+	- Harjoitusryhmätapaamisia voi filtteröidä group-parametrilla
+	
+* course/{courseID}/lectures
+	- Näyttää luennot
+	
+* course/{courseID}/name
+	- Näyttää kurssin nimen
+	
+* search/{query}
+	- Hakee kursseja joiden nimi tai koodi matchaa queryyn
+	
+Esimerkkejä:
+
+http://verkel.iki.fi:8080/course/t-79.4502/all?group=h01
+http://verkel.iki.fi:8080/search/matemat

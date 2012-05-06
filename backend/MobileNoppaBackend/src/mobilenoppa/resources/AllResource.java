@@ -10,13 +10,14 @@ import mobilenoppa.model.AllResults;
 import mobilenoppa.scraper.NoppaScraper;
 
 
-@Path("/{courseID}/all")
+@Path("course/{courseID}/all")
 public class AllResource {
 	@PathParam("courseID") public String courseID;
+	@QueryParam("group") public String groupID;
 	
    @GET
    @Produces(Resources.CONTENT_TYPE)
    public AllResults getMessage(){
-   	return NoppaScraper.getAll(courseID);
+   	return NoppaScraper.getAll(courseID, groupID);
    }
 }

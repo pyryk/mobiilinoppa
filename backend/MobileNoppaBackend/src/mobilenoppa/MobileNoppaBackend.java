@@ -42,11 +42,13 @@ public class MobileNoppaBackend {
 
        // register root resources
        classes.add(AllResource.class);
-       classes.add(NameResource.class);
-       classes.add(LecturesResource.class);
-       classes.add(ExerciseGroupsResource.class);
-       classes.add(ExamsResource.class);
        classes.add(AssignmentsResource.class);
+       classes.add(ExamsResource.class);
+       classes.add(ExerciseGroupsResource.class);
+       classes.add(ExerciseSessionsResource.class);
+       classes.add(LecturesResource.class);
+       classes.add(NameResource.class);
+       classes.add(SearchResource.class);
 
        // register Jackson ObjectMapper resolver
        classes.add(JSONMapperProvider.class);

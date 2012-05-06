@@ -12,7 +12,7 @@ import mobilenoppa.model.Exam;
 import mobilenoppa.scraper.NoppaScraper;
 
 
-@Path("/{courseID}/exams")
+@Path("course/{courseID}/exams")
 public class ExamsResource {
 	@PathParam("courseID") public String courseID;
 	
