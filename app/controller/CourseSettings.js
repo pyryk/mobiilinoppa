@@ -28,6 +28,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
               itemtap: 'courseSelected'
             },
             '#course-list': {
+			  itemtap: 'openCourseWebpage',
               disclose: 'removeCourse'
             }
         }
@@ -123,5 +124,20 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
           window.refreshCourseData();
         }
       });
-    }
+    },
+	openCourseWebpage: function(list, index, target, record, event, eOpts) {
+		console.log("openCourseWebpage");
+		var url = "https://noppa.aalto.fi/noppa/kurssi/" + record.data.code;
+		console.log(url);
+		
+		// Tric to open the web page in Safari if we are using iOS web app
+		var a = document.createElement('a');
+		a.setAttribute("href", url);
+	    a.setAttribute("target", "_blank");
+
+	    var dispatch = document.createEvent("HTMLEvents")
+	    dispatch.initEvent("click", true, true);
+	    a.dispatchEvent(dispatch);
+		
+	}
 });
