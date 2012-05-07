@@ -68,7 +68,6 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
 						  var course = CourseAutocomplete.add(json[i]);
 						}
 						var height = Math.max(json.length*47-1, 0);
-						Ext.getCmp('course-autocomplete').setHeight(height);
 						
 						console.log("Success",json);
   				},
@@ -76,8 +75,6 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
   				  console.log("Failure",response);
   				}
   			});
-      } else {
-        Ext.getCmp('course-autocomplete').setHeight(0);
       }
     },
     courseSelected: function(list, index, target, record, event) {
@@ -92,7 +89,6 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
         query: ''
       });
       Ext.getStore('CourseAutocomplete').removeAll();
-      Ext.getCmp('course-autocomplete').setHeight(0);
     },
     displayCourseList: function(btn) {
       console.log('displaying the course list');
