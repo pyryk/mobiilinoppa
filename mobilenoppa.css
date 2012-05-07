@@ -28,8 +28,20 @@
 	background: url("images/aalto.png") no-repeat 5px;
 }
 
+#course-autocomplete {
+  background: transparent;
+}
+
 .autocomplete-list {
   background-color: white;
+}
+
+.autocomplete-list:last-child {
+  border-radius: 0.4em;
+}
+
+.autocomplete-list:last-child .x-list-item-label {
+  border-bottom: none !important;
 }
 
 .course-list .x-list-disclosure {
