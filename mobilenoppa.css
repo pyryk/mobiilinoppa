@@ -21,7 +21,12 @@
 }
 
 .courseItem.assignment {
-	background-image: url("touch/resources/themes/images/default/pictos/event_complete.png");
+	background-image: url("touch/resources/themes/images/default/pictos/empty1.png");
+}
+
+.courseItem.assignment.done {
+	background-image: url("touch/resources/themes/images/default/pictos/check_dotted.png");
+	text-decoration: line-through;
 }
 
 .x-navigation-bar .x-toolbar-inner {
