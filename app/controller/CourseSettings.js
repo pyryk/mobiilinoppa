@@ -28,9 +28,17 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
               itemtap: 'courseSelected'
             },
             '#course-list': {
-			  itemtap: 'openCourseWebpage',
-              disclose: 'removeCourse'
-            }
+							itemtap: function(container,index,target,record,e,eOpts){
+								if (e.getTarget('.x-list-disclosure')) {
+									console.log("Disclosure clicked!");
+									this.removeCourse(record);
+
+								} else {
+									console.log("Item clicked!");
+									this.openCourseWebpage(record);
+								}
+							}
+						}
         }
     },
     launch: function() {
@@ -114,7 +122,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       
       window.refreshCourseData();
     },
-    removeCourse: function(list, record, target, index, event, eopts) {
+    removeCourse: function(record) {
       Ext.Msg.confirm("Are you sure?", "Are you sure you want to remove this course", function(val) {
         if (val === "yes") {
           var store = Ext.getStore('Courses');
@@ -125,7 +133,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
         }
       });
     },
-	openCourseWebpage: function(list, index, target, record, event, eOpts) {
+	openCourseWebpage: function(record) {
 		console.log("openCourseWebpage");
 		var url = "https://noppa.aalto.fi/noppa/kurssi/" + record.data.code;
 		console.log(url);
