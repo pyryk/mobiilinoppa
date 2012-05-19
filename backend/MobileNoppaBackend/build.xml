@@ -6,7 +6,7 @@
         <delete dir="build/MobileNoppaBackend"/>
         <mkdir dir="build/MobileNoppaBackend"/>
     	
-        <jar destfile="build/MobileNoppaBackend/MobileMoppaBackend.jar">
+        <jar destfile="build/MobileNoppaBackend/MobileNoppaBackend.jar">
             <manifest>
                 <attribute name="Main-Class" value="mobilenoppa.MobileNoppaBackend"/>
                 <attribute name="Class-Path" value=". jsoup-1.6.1.jar jersey-simple-server-1.8.jar simple-4.1.21.jar jersey-bundle-1.12.jar jsr311-api-1.1.1.jar jackson-core-asl-1.9.2.jar jackson-jaxrs-1.9.2.jar jackson-mapper-asl-1.9.2.jar joda-time-2.1.jar"/>
