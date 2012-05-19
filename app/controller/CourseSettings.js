@@ -28,8 +28,17 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
               itemtap: 'courseSelected'
             },
             '#course-list': {
-              disclose: 'removeCourse'
-            }
+							itemtap: function(container,index,target,record,e,eOpts){
+								if (e.getTarget('.x-list-disclosure')) {
+									console.log("Disclosure clicked!");
+									this.removeCourse(record);
+
+								} else {
+									console.log("Item clicked!");
+									this.openCourseWebpage(record);
+								}
+							}
+						}
         }
     },
     launch: function() {
@@ -55,6 +64,10 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
         Ext.Ajax.request({
   				url: url,
   				success: function(response){
+  				  if (val != field.getValue()) {
+  				    console.log('old request - not updating the view');
+  				    return;
+  				  }
   					var text = response.responseText;
 						var json = Ext.JSON.decode(text);
 						var view = app.getView('#course-autocomplete');
@@ -64,7 +77,6 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
 						  var course = CourseAutocomplete.add(json[i]);
 						}
 						var height = Math.max(json.length*47-1, 0);
-						Ext.getCmp('course-autocomplete').setHeight(height);
 						
 						console.log("Success",json);
   				},
@@ -72,8 +84,6 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
   				  console.log("Failure",response);
   				}
   			});
-      } else {
-        Ext.getCmp('course-autocomplete').setHeight(0);
       }
     },
     courseSelected: function(list, index, target, record, event) {
@@ -88,7 +98,6 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
         query: ''
       });
       Ext.getStore('CourseAutocomplete').removeAll();
-      Ext.getCmp('course-autocomplete').setHeight(0);
     },
     displayCourseList: function(btn) {
       console.log('displaying the course list');
@@ -113,7 +122,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       
       window.refreshCourseData();
     },
-    removeCourse: function(list, record, target, index, event, eopts) {
+    removeCourse: function(record) {
       Ext.Msg.confirm("Are you sure?", "Are you sure you want to remove this course", function(val) {
         if (val === "yes") {
           var store = Ext.getStore('Courses');
@@ -123,5 +132,20 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
           window.refreshCourseData();
         }
       });
-    }
+    },
+	openCourseWebpage: function(record) {
+		console.log("openCourseWebpage");
+		var url = "https://noppa.aalto.fi/noppa/kurssi/" + record.data.code;
+		console.log(url);
+		
+		// Tric to open the web page in Safari if we are using iOS web app
+		var a = document.createElement('a');
+		a.setAttribute("href", url);
+	    a.setAttribute("target", "_blank");
+
+	    var dispatch = document.createEvent("HTMLEvents")
+	    dispatch.initEvent("click", true, true);
+	    a.dispatchEvent(dispatch);
+		
+	}
 });

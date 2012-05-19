@@ -26,8 +26,9 @@ Ext.define('MobileNoppa.view.AddNew', {
                   store: 'CourseAutocomplete',
                   itemCls: 'autocomplete-list',
                   itemTpl: '{code} {name}',
-                  height: 0,
+                  emptyText: 'No results',
                   padding: 0,
+                  scrollable: false,
                 }
               ],
             },

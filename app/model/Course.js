@@ -16,14 +16,16 @@ Ext.define('MobileNoppa.model.Course', {
 window.refreshCourseData = function() {
 console.log("[MobileNoppa.controller.Courses] loadCourseItems");
 
-Ext.Viewport.setMasked({
-	xtype: 'loadmask',
-	message: 'Loading course data'
-});
-
 var CourseStore = Ext.getStore('Courses');
 var CourseItemStore = Ext.getStore('CourseItems');
 CourseItemStore.removeAll();
+
+if (CourseStore.data.length > 0) {
+  Ext.Viewport.setMasked({
+  	xtype: 'loadmask',
+  	message: 'Loading course data'
+  });
+}
 
 var courseLast = CourseStore.data.last();
 if (courseLast){
@@ -55,7 +57,7 @@ if (courseLast){
 				Ext.Viewport.setMasked(false);
 			}
 		});
-	});	
+	});
 }
 
 

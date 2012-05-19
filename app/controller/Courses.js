@@ -8,7 +8,7 @@ Ext.define('MobileNoppa.controller.Courses', {
             calendar: '#calendarlist'
         },
         control: {
-          '#calendarlist': {
+          calendar: {
             updatedata: 'updateData'
           },
           loadButton: {
@@ -31,5 +31,5 @@ Ext.define('MobileNoppa.controller.Courses', {
     },
     updateData: function() {
       console.log('data updated');
-    },
+    }
 });

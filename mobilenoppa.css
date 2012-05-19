@@ -21,15 +21,32 @@
 }
 
 .courseItem.assignment {
-	background-image: url("touch/resources/themes/images/default/pictos/event_complete.png");
+	background-image: url("touch/resources/themes/images/default/pictos/empty1.png");
+}
+
+.courseItem.assignment.done {
+	background-image: url("touch/resources/themes/images/default/pictos/check_dotted.png");
+	text-decoration: line-through;
 }
 
 .x-navigation-bar .x-toolbar-inner {
 	background: url("images/aalto.png") no-repeat 5px;
 }
 
+#course-autocomplete {
+  background: transparent;
+}
+
 .autocomplete-list {
   background-color: white;
+}
+
+.autocomplete-list:last-child {
+  border-radius: 0.4em;
+}
+
+.autocomplete-list:last-child .x-list-item-label {
+  border-bottom: none !important;
 }
 
 .course-list .x-list-disclosure {

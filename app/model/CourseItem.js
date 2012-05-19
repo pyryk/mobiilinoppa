@@ -11,7 +11,8 @@ Ext.define('MobileNoppa.model.CourseItem', {
     	{ name: 'date', type: 'date' },
     	{ name: 'type', type: 'string' },
     	{ name: 'duration', type: 'string' },
-    	{ name: 'location', type: 'string' }
+    	{ name: 'location', type: 'string' },
+		{ name: 'todo_status', type: 'boolean' }
     ],
     proxy: {
       type: 'localstorage',

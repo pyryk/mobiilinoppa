@@ -1,5 +1,6 @@
 Ext.define('MobileNoppa.view.Todo', {
   extend: 'Ext.Panel',
+	id: 'todo-panel',
     title: 'To-Do',
     iconCls: 'favorites',
     itemTpl: '{name} <span style="color: #bbb;">{date}</span>',
@@ -9,9 +10,10 @@ Ext.define('MobileNoppa.view.Todo', {
       items: [
         {
           xtype: 'courseitemlist',
+		  id: 'todo-list',
           store: 'CourseItems',
           grouped: true,
-          itemTpl: '<div class="courseItem assignment">{title} <br><span class="description">{courseName}</span></div>',
+          itemTpl: '<div class="courseItem assignment <tpl if="todo_status == true">done</tpl>">{title} <br><span class="description">{courseName}</span></div>',
         }
       ],
     },
