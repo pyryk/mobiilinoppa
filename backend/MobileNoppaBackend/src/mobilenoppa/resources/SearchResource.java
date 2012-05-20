@@ -11,6 +11,11 @@ import javax.ws.rs.*;
 import mobilenoppa.model.Course;
 import mobilenoppa.scraper.NoppaScraper;
 
+/**
+ * Searches for courses whose name matches the query
+ * 
+ * @author verkel
+ */
 @Path("search/{query}")
 public class SearchResource {
 	@PathParam("query") public String query;

@@ -4,11 +4,15 @@
  */
 package mobilenoppa.model;
 
-
+/**
+ * An assignment for a course
+ * 
+ * @author verkel
+ */
 public class Assignment extends CourseItem {
 
 	public String duration;
-	
+
 	@Override
 	public String getType() {
 		return "assignment";

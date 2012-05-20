@@ -4,7 +4,11 @@
  */
 package mobilenoppa.model;
 
-
+/**
+ * Exercise session (or exercise group meeting or "laskarit") for a course.
+ * 
+ * @author verkel
+ */
 public class ExerciseSession extends Event {
 
 	@Override
