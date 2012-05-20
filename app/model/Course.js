@@ -71,7 +71,7 @@ window.mobilenoppa.refreshCourseData = function() {
 							jsonItem["course_id"] = course.getId();
 							
 							// If item type is assignment, check for previous todo state
-							if(jsonItem.type = "assignment"){
+							if(jsonItem.type === "assignment"){
 								var hash = jsonItem.course_id + jsonItem.title;
 								if(todoStatusTemp[hash]){
 									console.log("Restoring todo state",jsonItem,todoStatusTemp[hash]);
@@ -93,5 +93,6 @@ window.mobilenoppa.refreshCourseData = function() {
 	} else {
 		// If there are no courses, remove all items as well
 		CourseItemStore.removeAll();
+		CourseItemStore.sync();
 	}
 }
