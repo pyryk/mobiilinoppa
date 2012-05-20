@@ -52,6 +52,7 @@ window.mobilenoppa.refreshCourseData = function() {
 			console.log("Loading course " + code, course);
 			
 			var url = window.mobilenoppa.apiUrl + 'course/'+code+'/all';
+			// filter by exercise group if there is one
 			if (course.get("exerciseGroup")) {
 			  url += "?group=" + course.get("exerciseGroup");
 			}

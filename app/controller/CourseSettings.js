@@ -32,6 +32,8 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
             },
             '#course-list': {
 							itemtap: function(container,index,target,record,e,eOpts){
+							  // itemtap is fired both on disclosure and normal tap - 
+							  // thats why we need to distinguish these events
 								if (e.getTarget('.x-list-disclosure')) {
 									console.log("Disclosure clicked!");
 									this.removeCourse(record);
