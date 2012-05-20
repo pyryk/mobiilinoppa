@@ -60,7 +60,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       
       // dont search with less than 3 characters
       if (val.length > 2) {
-        var url = 'http://verkel.iki.fi:8080/search/'+val+'';
+        var url = window.mobilenoppa.apiUrl + 'search/'+val+'';
         Ext.Ajax.request({
   				url: url,
   				success: function(response){

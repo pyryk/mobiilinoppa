@@ -32,7 +32,7 @@ if (courseLast){
 	CourseStore.each(function(course){
 		var code = course.get("code");
 		console.log("Loading course " + code, course);
-		var url = 'http://mobilenoppa.dy.fi/api/course/'+code+'/all';
+		var url = window.mobilenoppa.apiUrl + 'course/'+code+'/all';
 		if (course.get("exerciseGroup")) {
 		  url += "?group=" + course.get("exerciseGroup");
 		}
