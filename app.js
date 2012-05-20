@@ -10,6 +10,9 @@ window.mobilenoppa.app = Ext.application({
     controllers: ['Courses', 'Todo', 'CourseSettings'],
     stores: ['Courses', 'CourseItems', 'CourseAutocomplete'],
     launch: function() {
+			// Destroy the #appLoadingIndicator element
+      Ext.fly('appLoadingIndicator').destroy();
+	
       var titlebar = Ext.create('Ext.TitleBar', {
         title: 'Mobile Noppa',
         docked: 'top',

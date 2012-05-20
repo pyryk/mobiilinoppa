@@ -2,6 +2,66 @@
 <html>
 <head>
     <title>Mobile Noppa</title>
+	<style type="text/css">
+        /**
+         * Sencha Touch SDK provided loader animation
+         */
+        html, body {
+            height: 100%;
+        }
+
+        #appLoadingIndicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -50px;
+            width: 100px;
+            height: 20px;
+        }
+
+        #appLoadingIndicator > * {
+            background-color: #FFFFFF;
+            float: left;
+            height: 20px;
+            margin-left: 11px;
+            width: 20px;
+            -webkit-animation-name: appLoadingIndicator;
+            -webkit-border-radius: 13px;
+            -webkit-animation-duration: 0.8s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+            opacity: 0.3
+        }
+
+        #appLoadingIndicator > :nth-child(1) {
+            -webkit-animation-delay: 0.18s;
+        }
+
+        #appLoadingIndicator > :nth-child(2) {
+            -webkit-animation-delay: 0.42s;
+        }
+
+        #appLoadingIndicator > :nth-child(3) {
+            -webkit-animation-delay: 0.54s;
+        }
+
+        @-webkit-keyframes appLoadingIndicator{
+            0% {
+                opacity: 0.3
+            }
+
+            50% {
+                opacity: 1;
+                background-color:#1985D0
+            }
+
+            100% {
+                opacity:0.3
+            }
+        }
+    </style>
+
     <link rel="stylesheet" href="touch/resources/css/sencha-touch.css" type="text/css">
     <link rel="stylesheet" href="mobilenoppa.css" type="text/css">
     <!-- For iPhone 4 with high-resolution Retina display: -->
@@ -17,5 +77,11 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="lib/moment.min.js"></script>
 </head>
-<body></body>
+<body>
+	<div id="appLoadingIndicator">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
 </html>
