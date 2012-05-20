@@ -10,11 +10,11 @@ Ext.define('MobileNoppa.view.AddNew', {
           flex: 1,
           id: 'newcourseform',
           items: [
-            {
+            { // autocomplete form
               xtype: "fieldset",
               title: "Search for a course",
               items: [
-                {
+                { 
                   xtype: "searchfield",
                   label: "Search",
                   name: 'query',
@@ -32,7 +32,7 @@ Ext.define('MobileNoppa.view.AddNew', {
                 }
               ],
             },
-            {
+            { // manual enter form
               xtype: "fieldset",
               title: "Or enter info manually",
               items: [

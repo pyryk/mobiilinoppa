@@ -19,6 +19,7 @@ window.mobilenoppa.app = Ext.application({
         }]
       });
       
+      // create the views
       var calendar = Ext.create('MobileNoppa.view.Calendar', {
         title: 'Calendar',
         iconCls: 'time',
@@ -32,6 +33,7 @@ window.mobilenoppa.app = Ext.application({
         iconCls: 'settings',
       });
       
+      // create the main view and add the views there
       Ext.create("Ext.tab.Panel", {
         fullscreen: true,
         tabBarPosition: 'bottom',
