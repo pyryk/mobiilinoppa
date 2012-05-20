@@ -1,6 +1,7 @@
 window.mobilenoppa = {};
 
 window.mobilenoppa.apiUrl = "http://mobilenoppa.dy.fi/api/";
+window.mobilenoppa.showOldEvents = false;
 
 window.mobilenoppa.app = Ext.application({
     name: 'MobileNoppa',

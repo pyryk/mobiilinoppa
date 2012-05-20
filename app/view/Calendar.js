@@ -24,11 +24,13 @@ Ext.define('MobileNoppa.view.Calendar', {
     console.log('calendar shown');
     // calendar includes all course items
     Ext.getStore('CourseItems').clearFilter();
-    Ext.getStore('CourseItems').filterBy(function(record, id) {
-      var today = new Date();
-      today.setHours(0,0,0,0);
-      return record.get('date') >= today;
-    });
+		if(window.mobilenoppa.showOldEvents === false){
+			Ext.getStore('CourseItems').filterBy(function(record, id) {
+	      var today = new Date();
+	      today.setHours(0,0,0,0);
+	      return record.get('date') >= today;
+	    });
+		}
   },
   initialize: function() {
     console.log('initializing calendar');

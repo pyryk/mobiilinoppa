@@ -17,6 +17,9 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
             '#add-new-view-button': {
               tap: 'displayAddNew'
             },
+						'#showOldToggle': {
+              change: 'changeShowOldEvents'
+            },
             '#back-to-course-list-button': {
               tap: 'displayCourseList'
             },
@@ -147,5 +150,12 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
 	    dispatch.initEvent("click", true, true);
 	    a.dispatchEvent(dispatch);
 		
+	},
+	changeShowOldEvents: function (slider, thumb, newValue, oldValue) {
+		if (newValue === 1){
+			window.mobilenoppa.showOldEvents = true;
+		} else {
+			window.mobilenoppa.showOldEvents = false;
+		}
 	}
 });

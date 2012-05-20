@@ -26,8 +26,17 @@ Ext.define('MobileNoppa.view.CourseSettings', {
               text: "Add new",
               ui: "action",
               docked: 'bottom',
-            },
-          ],
+						},
+						{
+							xtype: "togglefield",
+							name: "toggle",
+							id: "showOldToggle",
+							label: "Show old course events",
+							docked: "bottom",
+							labelWidth: '70%',
+							labelAlign: 'right'
+						},
+					],
         },
         {
           xtype: 'addnewcourse',

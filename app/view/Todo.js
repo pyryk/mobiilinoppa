@@ -26,10 +26,12 @@ Ext.define('MobileNoppa.view.Todo', {
       // Todo includes only assigments
       Ext.getStore('CourseItems').filter('type', 'assignment');
 
-      Ext.getStore('CourseItems').filterBy(function(record, id) {
-        var today = new Date();
-        today.setHours(0,0,0,0);
-        return record.get('date') >= today;
-      });
+			if(window.mobilenoppa.showOldEvents === false){
+	      Ext.getStore('CourseItems').filterBy(function(record, id) {
+	        var today = new Date();
+	        today.setHours(0,0,0,0);
+	        return record.get('date') >= today;
+	      });
+			}
     }
 });
