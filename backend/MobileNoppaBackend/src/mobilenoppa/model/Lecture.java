@@ -4,7 +4,11 @@
  */
 package mobilenoppa.model;
 
-
+/**
+ * A lecture for a course
+ * 
+ * @author verkel
+ */
 public class Lecture extends Event {
 
 	@Override

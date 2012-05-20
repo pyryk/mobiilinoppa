@@ -11,7 +11,13 @@ import javax.ws.rs.*;
 import mobilenoppa.model.Event;
 import mobilenoppa.scraper.NoppaScraper;
 
-
+/**
+ * <ul>
+ * <li>List of exercise group meetings (laskarit) on a course
+ * <li>You can filter exercise group meetings to specific group with the groupID parameter
+ * </ul>
+ * @author verkel
+ */
 @Path("course/{courseID}/exerciseSessions")
 public class ExerciseSessionsResource {
 	@PathParam("courseID") public String courseID;

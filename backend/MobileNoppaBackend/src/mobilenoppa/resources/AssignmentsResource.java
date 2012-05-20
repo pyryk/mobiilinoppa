@@ -11,14 +11,20 @@ import javax.ws.rs.*;
 import mobilenoppa.model.Assignment;
 import mobilenoppa.scraper.NoppaScraper;
 
-
+/**
+ * List of (generally major) assignments on a course
+ * 
+ * @author verkel
+ */
 @Path("course/{courseID}/assignments")
 public class AssignmentsResource {
-	@PathParam("courseID") public String courseID;
-	
-   @GET
-   @Produces(Resources.CONTENT_TYPE)
-   public List<Assignment> getMessage(){
-   	return NoppaScraper.getAssignments(courseID);
-   }
+
+	@PathParam("courseID")
+	public String courseID;
+
+	@GET
+	@Produces(Resources.CONTENT_TYPE)
+	public List<Assignment> getMessage() {
+		return NoppaScraper.getAssignments(courseID);
+	}
 }

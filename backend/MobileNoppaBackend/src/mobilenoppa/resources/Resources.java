@@ -4,7 +4,12 @@
  */
 package mobilenoppa.resources;
 
-
+/**
+ * Shared things between Resources
+ * 
+ * @author verkel
+ */
 public class Resources {
+
 	public static final String CONTENT_TYPE = "application/json; charset=utf-8";
 }
