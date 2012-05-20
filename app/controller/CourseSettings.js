@@ -120,7 +120,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
       
       console.log("added a new course");
       
-      window.refreshCourseData();
+      window.mobilenoppa.refreshCourseData();
     },
     removeCourse: function(record) {
       Ext.Msg.confirm("Are you sure?", "Are you sure you want to remove this course", function(val) {
@@ -129,7 +129,7 @@ Ext.define('MobileNoppa.controller.CourseSettings', {
           store.remove(record);
           store.sync();
           
-          window.refreshCourseData();
+          window.mobilenoppa.refreshCourseData();
         }
       });
     },

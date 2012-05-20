@@ -27,7 +27,7 @@ Ext.define('MobileNoppa.controller.Courses', {
       //this.loadCourseItems();
     },
     loadCourseItems: function() {
-      window.refreshCourseData();
+      window.mobilenoppa.refreshCourseData();
     },
     updateData: function() {
       console.log('data updated');
