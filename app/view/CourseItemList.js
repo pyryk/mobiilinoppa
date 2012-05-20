@@ -3,7 +3,7 @@ Ext.define('MobileNoppa.view.CourseItemList', {
   alias: 'widget.courseitemlist',
   config: {
     disableSelection: true,
-    emptyText: "No course items found! Please check your courses."
+    emptyText: "<b>No course items to show!</b><br />Please add some courses at Courses-tab."
   },
   prepareData: function(data, index, item) {
     var parentData = this.callParent(arguments);

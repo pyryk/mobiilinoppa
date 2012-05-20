@@ -50,6 +50,11 @@
 }
 
 .course-list .x-list-disclosure {
-  -webkit-mask: 0 0 url('images/delete.png');
-  
+  -webkit-mask: 0 0 url('images/delete.png'); 
+}
+
+.x-list-emptytext {
+	text-align: center;
+	margin-top: 100px;
+	padding: 20px;
 }
