@@ -17,16 +17,21 @@ import org.joda.time.format.*;
  */
 public class DateUtils {
 
-	private static final DateTimeFormatter dateFormatFin = DateTimeFormat.forPattern("dd.MM.yy");
-	private static final DateTimeFormatter dateFormatNoYearFin = DateTimeFormat.forPattern("dd.MM.");
+	private static final Locale finnish = new Locale("fi");
+	
+	private static final DateTimeFormatter dateFormatFin = DateTimeFormat.forPattern("dd.MM.yy")
+		.withLocale(finnish);
+	private static final DateTimeFormatter dateFormatNoYearFin = DateTimeFormat.forPattern("dd.MM.")
+		.withLocale(finnish);
 	private static final DateTimeFormatter dateFormatUs = DateTimeFormat.forPattern("dd MMM yy")
 		.withLocale(Locale.US);
 	private static final DateTimeFormatter dateFormatNoYearUs = DateTimeFormat.forPattern("dd MMM")
 		.withLocale(Locale.US);
 
-	private static final DateTimeFormatter dayFormatFin = DateTimeFormat.forPattern("E");
-	private static final DateTimeFormatter dayFormatUs = DateTimeFormat.forPattern("E").withLocale(
-		Locale.US);;
+	private static final DateTimeFormatter dayFormatFin = DateTimeFormat.forPattern("E")
+		.withLocale(finnish);
+	private static final DateTimeFormatter dayFormatUs = DateTimeFormat.forPattern("E")
+		.withLocale(Locale.US);;
 
 	private static final DateTimeFormatter[] dateFormatters = { dateFormatFin, dateFormatNoYearFin,
 		dateFormatUs, dateFormatNoYearUs };
