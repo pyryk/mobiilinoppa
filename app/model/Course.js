@@ -90,5 +90,8 @@ window.mobilenoppa.refreshCourseData = function() {
 				}
 			});
 		});
+	} else {
+		// If there are no courses, remove all items as well
+		CourseItemStore.removeAll();
 	}
 }
