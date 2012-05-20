@@ -10,6 +10,11 @@ import javax.ws.rs.*;
 
 import mobilenoppa.scraper.NoppaScraper;
 
+/**
+ * List of codes of exercise groups on this course
+ * 
+ * @author verkel
+ */
 @Path("course/{courseID}/exerciseGroups")
 public class ExerciseGroupsResource {
 	@PathParam("courseID") public String courseID;

@@ -6,6 +6,11 @@ package mobilenoppa.model;
 
 import java.util.List;
 
+/**
+ * The root response object for the all courses query
+ * 
+ * @author verkel
+ */
 public class AllResults {
 
 	public String name;

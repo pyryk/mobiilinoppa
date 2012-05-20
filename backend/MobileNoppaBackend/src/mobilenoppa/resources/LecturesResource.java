@@ -11,7 +11,11 @@ import javax.ws.rs.*;
 import mobilenoppa.model.Lecture;
 import mobilenoppa.scraper.NoppaScraper;
 
-
+/**
+ * List of lectures on a course
+ * 
+ * @author verkel
+ */
 @Path("course/{courseID}/lectures")
 public class LecturesResource {
 	@PathParam("courseID") public String courseID;

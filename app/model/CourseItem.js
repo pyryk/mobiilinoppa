@@ -1,4 +1,8 @@
-// specific items/happening on a course: lectures, excercise groups, deadlines
+/*
+ * Course item model
+ *
+ * represents specific items/happening on a course: lectures, excercise groups, deadlines
+ */
 Ext.define('MobileNoppa.model.CourseItem', {
   extend: 'Ext.data.Model',
   

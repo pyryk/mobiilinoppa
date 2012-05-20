@@ -1,0 +1,23 @@
+
+Installation instructions for the backend
+-----------------------------------------
+
+You need to have the following installed:
+- Oracle Java JDK 6 or newer
+- Eclipse
+
+Create a new Eclipse workspace and import the following projects into it:
+- /backend/Libraries
+- /backend/MobileNoppaBackend
+
+You can start the backend by running the mobilenoppa.MobileNoppaBackend class as a Java Application
+from the project MobileNoppaBackend. The backend will then bind itself to localhost:8080 and serve
+JSON content from there, for instance try http://localhost:8080/course/t-111.5360/all in your
+web browser.
+
+You can also build the backend for running outside Eclipse workspace. Run the "jar" target from
+the Ant build script MobileNoppaBackend/build.xml to generate the folder
+MobileNoppaBackend/build/MobileNoppaBackend. You can copy this folder to wherever you like, and
+inside the folder, you can start the backend with:
+
+java -jar MobileNoppaBackend.jar

@@ -4,6 +4,11 @@
  */
 package mobilenoppa.model;
 
+/**
+ * A course, consisting of the course code and course name
+ * 
+ * @author verkel
+ */
 public class Course {
 
 	public String code;

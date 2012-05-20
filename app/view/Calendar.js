@@ -12,7 +12,7 @@ Ext.define('MobileNoppa.view.Calendar', {
         store: 'CourseItems',
         id: 'calendarlist',
         grouped: true,
-        itemTpl: '<div class="courseItem {type}">'
+        itemTpl: '<div class="courseItem {type} <tpl if="todo_status == true">done</tpl>" >'
         	+'{title}<br />'
         	+'<span class="dateAndLocation">{duration} {location}</span> '
         	+'<span class="courseName">{courseName}</span></div>'
@@ -24,11 +24,13 @@ Ext.define('MobileNoppa.view.Calendar', {
     console.log('calendar shown');
     // calendar includes all course items
     Ext.getStore('CourseItems').clearFilter();
-    Ext.getStore('CourseItems').filterBy(function(record, id) {
-      var today = new Date();
-      today.setHours(0,0,0,0);
-      return record.get('date') >= today;
-    });
+		if(window.mobilenoppa.showOldEvents === false){
+			Ext.getStore('CourseItems').filterBy(function(record, id) {
+	      var today = new Date();
+	      today.setHours(0,0,0,0);
+	      return record.get('date') >= today;
+	    });
+		}
   },
   initialize: function() {
     console.log('initializing calendar');

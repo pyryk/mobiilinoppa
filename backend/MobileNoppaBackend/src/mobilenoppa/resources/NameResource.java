@@ -8,7 +8,11 @@ import javax.ws.rs.*;
 
 import mobilenoppa.scraper.NoppaScraper;
 
-
+/**
+ * The course name
+ * 
+ * @author verkel
+ */
 @Path("course/{courseID}/name")
 public class NameResource {
 	@PathParam("courseID") public String courseID;

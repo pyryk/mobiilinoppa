@@ -5,7 +5,9 @@ import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-/*
+/**
+ * Provides a JSON mapper for object serialization
+ * 
  * Created on 28.3.2012
  * @author verkel
  */
