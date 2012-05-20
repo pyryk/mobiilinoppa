@@ -1,4 +1,8 @@
-// course model, contains all lectures, assignments etc.
+/*
+ * Course model, represents one course
+ * 
+ * Has many courseItems that are the actual course contents
+ */
 Ext.define('MobileNoppa.model.Course', {
   extend: 'Ext.data.Model',
 
@@ -36,12 +40,12 @@ window.mobilenoppa.refreshCourseData = function() {
 			if(courseItem.get("type") == "assignment"){
 				var hash = courseItem.get("course_id") + courseItem.get("title"); 
 				todoStatusTemp[hash] = courseItem.get("todo_status"); 
-	}
+			}
 		});
 		
 		// Remove old items
 		CourseItemStore.removeAll();
-
+	
 		// Load items for each course
 		CourseStore.each(function(course){
 			var code = course.get("code");
@@ -76,7 +80,7 @@ window.mobilenoppa.refreshCourseData = function() {
 							// Add the item to CourseItemStore
 							var courseItem = CourseItemStore.add(jsonItem);
 						}
-					
+						
 						// Save the store to localstorage
 						CourseItemStore.sync();
 					}

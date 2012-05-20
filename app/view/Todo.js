@@ -20,9 +20,12 @@ Ext.define('MobileNoppa.view.Todo', {
     show: function() {
       this.callParent(arguments);
       console.log('todo shown');
-      // calendar includes all course items
+
       Ext.getStore('CourseItems').clearFilter();
+
+      // Todo includes only assigments
       Ext.getStore('CourseItems').filter('type', 'assignment');
+
       Ext.getStore('CourseItems').filterBy(function(record, id) {
         var today = new Date();
         today.setHours(0,0,0,0);
